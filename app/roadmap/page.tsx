@@ -5,11 +5,15 @@ import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
+import { defaultLocale } from "@/i18n/config"
+import { getTranslation, t } from "@/i18n/utils"
 
 export default function RoadmapPage() {
+  const locale = defaultLocale
+  const translations = getTranslation(locale)
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header locale={locale} />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -261,7 +265,7 @@ export default function RoadmapPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer locale={locale} />
     </div>
   )
 }

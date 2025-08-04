@@ -14,21 +14,29 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
   const pathname = usePathname()
 
   const handleLanguageChange = (locale: Locale) => {
-    // Remove current locale from pathname if it exists
     let newPath = pathname
 
-    // Check if current path starts with a locale
+    // Remove current locale from pathname if it exists
     const segments = pathname.split("/").filter(Boolean)
+
+    // Check if current path starts with a locale
     if (segments.length > 0 && locales.includes(segments[0] as Locale)) {
       // Remove the locale segment
       newPath = "/" + segments.slice(1).join("/")
     }
 
+    // Handle root path
+    if (newPath === "" || newPath === "/") {
+      newPath = "/"
+    }
+
     // Add new locale to pathname (except for default locale)
     if (locale === defaultLocale) {
-      router.push(newPath || "/")
+      // For default locale, just use the path without locale prefix
+      router.push(newPath === "/" ? "/" : newPath)
     } else {
-      router.push(`/${locale}${newPath}`)
+      // For other locales, add locale prefix
+      router.push(`/${locale}${newPath === "/" ? "" : newPath}`)
     }
   }
 

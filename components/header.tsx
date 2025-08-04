@@ -41,8 +41,11 @@ export function Header({ locale }: HeaderProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href={getLocalizedPath("/")} className="flex items-center space-x-2">
-            <Globe className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">VisaFlow CRM</span>
+            
+            <span className="text-xl font-bold text-gray-900">
+              <img src="/visaflow-logo.png"  alt="visaflow logo" style={{ height: "35px" }}/>
+
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -88,11 +91,9 @@ export function Header({ locale }: HeaderProps) {
           {/* Desktop CTA Buttons and Language Switcher */}
           <div className="hidden md:flex items-center space-x-4">
             <LanguageSwitcher currentLocale={locale} />
+            
             <Link href={getLocalizedPath("/signin")}>
-              <Button variant="ghost">{t(translations, "nav.signIn")}</Button>
-            </Link>
-            <Link href={getLocalizedPath("/contact")}>
-              <Button>{t(translations, "nav.getStarted")}</Button>
+              <Button>{t(translations, "nav.signIn")}</Button>
             </Link>
           </div>
 
@@ -158,14 +159,10 @@ export function Header({ locale }: HeaderProps) {
                 <div className="pb-3">
                   <LanguageSwitcher currentLocale={locale} />
                 </div>
+                
                 <Link href={getLocalizedPath("/signin")}>
-                  <Button variant="ghost" className="justify-start w-full" onClick={toggleMobileMenu}>
-                    {t(translations, "nav.signIn")}
-                  </Button>
-                </Link>
-                <Link href={getLocalizedPath("/contact")}>
                   <Button className="justify-start w-full" onClick={toggleMobileMenu}>
-                    {t(translations, "nav.getStarted")}
+                    {t(translations, "nav.signIn")}
                   </Button>
                 </Link>
               </div>

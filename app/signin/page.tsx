@@ -12,8 +12,12 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useState } from "react"
 import Link from "next/link"
+import { defaultLocale } from "@/i18n/config"
+import { getTranslation, t } from "@/i18n/utils"
 
 export default function SignInPage() {
+  const locale = defaultLocale
+    const translations = getTranslation(locale)
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
@@ -44,7 +48,7 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header locale={locale} />
 
       <section className="py-20 bg-gray-50 min-h-screen flex items-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -179,7 +183,7 @@ export default function SignInPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer locale={locale} />
     </div>
   )
 }

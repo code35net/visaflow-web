@@ -11,8 +11,12 @@ import { Label } from "@/components/ui/label"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useState } from "react"
+import { defaultLocale } from "@/i18n/config"
+import { getTranslation, t } from "@/i18n/utils"
 
 export default function ContactPage() {
+  const locale = defaultLocale
+  const translations = getTranslation(locale)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -56,7 +60,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header locale={locale} />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -272,7 +276,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer  locale={locale}/>
     </div>
   )
 }
