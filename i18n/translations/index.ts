@@ -7,10 +7,10 @@ import { et } from "./et"
 import { ru } from "./ru"
 
 export const translations = {
-  en,
-  es,
-  ar,
   tr,
+  en,
+  ar,
+  es,
   az,
   et,
   ru,

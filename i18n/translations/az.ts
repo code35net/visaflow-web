@@ -19,7 +19,6 @@ export const az = {
       "Viza ofisləri üçün xüsusi olaraq hazırlanmış tam CRM həlli. Müştəriləri idarə edin, ərizələri izləyin və hamısı bir yerdə platformumuzla komandanızın məhsuldarlığını artırın.",
     startFreeTrial: "Pulsuz Sınaq Başladın",
     watchDemo: "Demo İzləyin",
-    freeTrialNote: "Kredit kartı tələb olunmur • 14 günlük pulsuz sınaq",
 
     // Features section
     featuresTitle: "Viza Ofisinizi İdarə Etmək Üçün Lazım Olan Hər Şey",

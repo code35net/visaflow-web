@@ -118,7 +118,7 @@ export default function LocalePricingPage({ params }: LocalePricingPageProps) {
                 {t(translations, "homepage.schedulDemo")}
               </Button>
             </div>
-            <p className="text-sm text-gray-500 mt-4">{t(translations, "homepage.freeTrialNote")}</p>
+            
           </div>
         </div>
       </section>

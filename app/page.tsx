@@ -14,8 +14,9 @@ export default function HomePage() {
 
   // Calculate pricing
   const monthlyPrice = 69
+  const monthlyUserPrice = 2
   const yearlyPrice = Math.round(monthlyPrice * 12 * 0.8) // 20% off
-  const additionalUserPrice = Math.round(monthlyPrice * 0.7) // 30% off
+  const additionalUserPrice = Math.round(monthlyUserPrice) 
 
   return (
     <div className="min-h-screen bg-white">
@@ -48,7 +49,7 @@ export default function HomePage() {
                   {t(translations, "homepage.watchDemo")}
                 </Button>
               </div>
-              <p className="text-sm text-gray-500 mt-4">{t(translations, "homepage.freeTrialNote")}</p>
+              
             </div>
 
             {/* Hero Image */}
@@ -120,7 +121,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center text-white">
             <div>
-              <div className="text-4xl font-bold mb-2">500+</div>
+              <div className="text-4xl font-bold mb-2">100+</div>
               <div className="text-blue-100">{t(translations, "homepage.visaOffices")}</div>
             </div>
             <div>
@@ -132,7 +133,7 @@ export default function HomePage() {
               <div className="text-blue-100">{t(translations, "homepage.customerSatisfaction")}</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">24/7</div>
+              <div className="text-4xl font-bold mb-2">780</div>
               <div className="text-blue-100">{t(translations, "homepage.supportAvailable")}</div>
             </div>
           </div>
@@ -140,7 +141,7 @@ export default function HomePage() {
       </section>
 
       {/* Customer Testimonials */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -237,7 +238,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Pricing Section */}
       <section id="pricing" className="py-20 bg-white">
@@ -269,7 +270,7 @@ export default function HomePage() {
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                    {t(translations, "homepage.allFeatures")}
+                    {t(translations, "homepage.unlimitedApplications")}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
@@ -277,14 +278,14 @@ export default function HomePage() {
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                    {t(translations, "homepage.documentStorage")}
+                    {t(translations, "homepage.currencyConverter")}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-                    {t(translations, "homepage.apiAccess")}
+                    {t(translations, "homepage.unlimitedCountry")}
                   </li>
                 </ul>
-                <Link href="/contact">
+                <Link href="/pricing">
                   <Button className="w-full mt-6">{t(translations, "nav.getStarted")}</Button>
                 </Link>
               </CardContent>
@@ -336,7 +337,7 @@ export default function HomePage() {
                     {t(translations, "homepage.prioritySupport")}
                   </li>
                 </ul>
-                <Link href="/contact">
+                <Link href="/pricing">
                   <Button className="w-full mt-6">{t(translations, "nav.getStarted")}</Button>
                 </Link>
               </CardContent>
@@ -381,7 +382,7 @@ export default function HomePage() {
                     {t(translations, "homepage.training")}
                   </li>
                 </ul>
-                <Link href="/contact">
+                <Link href="/pricing">
                   <Button className="w-full mt-6">{t(translations, "homepage.contactSales")}</Button>
                 </Link>
               </CardContent>
@@ -402,13 +403,7 @@ export default function HomePage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 py-3 text-white border-white hover:bg-white hover:text-blue-600 bg-transparent"
-            >
-              {t(translations, "homepage.schedulDemo")}
-            </Button>
+            
           </div>
         </div>
       </section>

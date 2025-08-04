@@ -19,7 +19,8 @@ export const fr = {
       "La solution CRM complète conçue spécifiquement pour les bureaux de visas. Gérez les clients, suivez les demandes et boostez la productivité de votre équipe avec notre plateforme tout-en-un.",
     startFreeTrial: "Commencer l'Essai Gratuit",
     watchDemo: "Voir la Démo",
-    freeTrialNote: "Aucune carte de crédit requise • Essai gratuit de 14 jours",
+    
+    
 
     // Features section
     featuresTitle: "Tout ce dont vous avez besoin pour gérer votre bureau de visas",

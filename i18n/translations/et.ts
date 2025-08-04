@@ -19,8 +19,7 @@ export const et = {
       "Täielik CRM lahendus, mis on spetsiaalselt loodud viisabüroodele. Hallake kliente, jälgige taotlusi ja suurendage oma meeskonna tootlikkust meie kõik-ühes platvormiga.",
     startFreeTrial: "Alusta tasuta prooviperioodi",
     watchDemo: "Vaata demot",
-    freeTrialNote: "Krediitkaart pole vajalik • 14-päevane tasuta prooviperiood",
-
+    
     // Features section
     featuresTitle: "Kõik, mida vajate oma viisabüroo juhtimiseks",
     featuresDescription:

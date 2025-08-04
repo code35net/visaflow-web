@@ -19,7 +19,7 @@ export const es = {
       "La solución CRM completa diseñada específicamente para oficinas de visas. Gestiona clientes, rastrea aplicaciones y aumenta la productividad de tu equipo con nuestra plataforma todo-en-uno.",
     startFreeTrial: "Comenzar Prueba Gratuita",
     watchDemo: "Ver Demo",
-    freeTrialNote: "No se requiere tarjeta de crédito • Prueba gratuita de 14 días",
+    
 
     // Features section
     featuresTitle: "Todo lo que necesitas para dirigir tu oficina de visas",

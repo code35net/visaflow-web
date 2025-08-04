@@ -106,10 +106,15 @@ export function Footer({ locale }: FooterProps) {
             </ul>
           </div>
         </div> */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 VisaFlow CRM. A CODE35 Brand. All rights reserved.</p>
-        </div>
+        
       </div>
+      <div className="border-gray-800 text-center text-gray-400">
+          <p>&copy; 2024 Visa Flow CRM by CODE35 | A Software Company</p>
+        </div>
+
+      {/* <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p>&copy; 2024 Visa Flow CRM by CODE35 | A Software Company</p>
+        </div> */}
     </footer>
   )
 }

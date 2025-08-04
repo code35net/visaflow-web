@@ -12,20 +12,20 @@ export const en = {
 
   // Homepage
   homepage: {
-    badge: "Trusted by 500+ Visa Offices Worldwide",
-    heroTitle: "Streamline Your Visa Office Operations with",
+    badge: "Trusted by 100+ Visa Offices Worldwide",
+    heroTitle: "Streamline your visa application operations with ",
     heroTitleHighlight: "VisaFlow CRM",
     heroDescription:
       "The complete CRM solution designed specifically for visa offices. Manage clients, track applications, and boost your team's productivity with our all-in-one platform.",
-    startFreeTrial: "Start Free Trial",
-    watchDemo: "Watch Demo",
-    freeTrialNote: "No credit card required • 14-day free trial",
+    startFreeTrial: "Start Today",
+    watchDemo: "Contact for Demo",
+  
 
     // Features section
-    featuresTitle: "Everything You Need to Run Your Visa Office",
-    featuresDescription: "Powerful features built specifically for visa offices and immigration consultants",
+    featuresTitle: "Everything You Need to Run Your Customer Operations",
+    featuresDescription: "Powerful features built specifically for visa offices",
     clientManagement: "Client Management",
-    clientManagementDesc: "Comprehensive client profiles with contact information, visa history, and document storage",
+    clientManagementDesc: "Comprehensive client profiles with contact information, visa and application history",
     applicationTracking: "Application Tracking",
     applicationTrackingDesc: "Track visa applications from submission to approval with real-time status updates",
     appointmentScheduling: "Appointment Scheduling",
@@ -36,7 +36,7 @@ export const en = {
     visaOffices: "Visa Offices",
     applicationsProcessed: "Applications Processed",
     customerSatisfaction: "Customer Satisfaction",
-    supportAvailable: "Support Available",
+    supportAvailable: "Hours Saved per Year",
 
     // Testimonials
     testimonialsTitle: "Trusted by Visa Offices Worldwide",
@@ -64,11 +64,13 @@ export const en = {
 
     // Features included
     unlimitedClients: "Unlimited clients",
+    unlimitedApplications: "Unlimited applications",
+    currencyConverter:"Currency Converter",
     allFeatures: "All core features included",
     emailSupport: "Email support",
     phoneSupport: "Priority phone support",
     documentStorage: "Unlimited document storage",
-    apiAccess: "Full API access",
+    unlimitedCountry: "Unlimited Country",
     customIntegrations: "Custom integrations",
     advancedAnalytics: "Advanced analytics",
     teamCollaboration: "Team collaboration tools",

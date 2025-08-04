@@ -19,7 +19,7 @@ export const tr = {
       "Vize ofisleri için özel olarak tasarlanmış eksiksiz CRM çözümü. Müşterileri yönetin, başvuruları takip edin ve hepsi bir arada platformumuzla ekibinizin verimliliğini artırın.",
     startFreeTrial: "Ücretsiz Deneme Başlatın",
     watchDemo: "Demo İzleyin",
-    freeTrialNote: "Kredi kartı gerekmez • 14 günlük ücretsiz deneme",
+    
 
     // Features section
     featuresTitle: "Vize Ofisinizi Yönetmek İçin İhtiyacınız Olan Her Şey",

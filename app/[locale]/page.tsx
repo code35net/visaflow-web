@@ -58,7 +58,7 @@ export default function LocaleHomePage({ params }: LocaleHomePageProps) {
                   {t(translations, "homepage.watchDemo")}
                 </Button>
               </div>
-              <p className="text-sm text-gray-500 mt-4">{t(translations, "homepage.freeTrialNote")}</p>
+              
             </div>
 
             {/* Hero Image */}
