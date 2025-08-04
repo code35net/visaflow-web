@@ -39,8 +39,14 @@ export function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center space-x-2">
-            <Globe className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">VisaFlow CRM</span>
+            
+            <span className="text-xl font-bold text-gray-900">
+              <img
+                  src="/visaflow-logo.png"
+                  alt="VisaFlow Logo"
+                  className="h-10 w-auto"
+                />
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -93,12 +99,10 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="px-4 pt-4 border-t space-y-2">
-                <Button variant="ghost" className="w-full justify-start">
+                <Button className="w-full bg-blue-600 hover:bg-blue-700">
                   {getTranslation(currentLang, "login")}
                 </Button>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  {getTranslation(currentLang, "freeTrial")}
-                </Button>
+
               </div>
             </nav>
           </div>

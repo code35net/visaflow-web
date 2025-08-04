@@ -10,11 +10,11 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "VisaFlow CRM - Vize Ofisleri İçin CRM Sistemi",
+  title: "VisaFlow CRM",
   description:
     "Küçük ve orta ölçekli vize ofisleri için özel tasarlanmış CRM sistemi. Müşteri takibi, başvuru yönetimi ve randevu sistemi.",
   keywords: "vize, CRM, müşteri yönetimi, randevu sistemi, başvuru takibi",
-    generator: 'v0.dev'
+    generator: 'CODE35'
 }
 
 export default function RootLayout({
