@@ -1,37 +1,62 @@
-import { CheckCircle, Clock, Calendar, ArrowRight } from "lucide-react"
+"use client"
+
+import { useState, useEffect } from "react"
+import { getTranslation, type Language } from "@/lib/translations"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+import {
+  Globe,
+  Calendar,
+  CheckCircle,
+  Clock,
+  Zap,
+  Smartphone,
+  Bot,
+  BarChart3,
+  Plug,
+  Languages,
+  Shield,
+  Expand,
+  ArrowLeft,
+} from "lucide-react"
 import Link from "next/link"
-import { defaultLocale } from "@/i18n/config"
-import { getTranslation, t } from "@/i18n/utils"
+import { Navigation } from "@/components/navigation"
 
 export default function RoadmapPage() {
-  const locale = defaultLocale
-  const translations = getTranslation(locale)
+  const [currentLang, setCurrentLang] = useState<Language>("tr")
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem("language") as Language
+    if (savedLang) setCurrentLang(savedLang)
+
+    const handleLanguageChange = (event: CustomEvent) => {
+      setCurrentLang(event.detail as Language)
+    }
+
+    window.addEventListener("languageChange", handleLanguageChange as EventListener)
+    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
-      <Header locale={locale} />
+      {/* Header */}
+      <Navigation />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
+            <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              {getTranslation(currentLang, "backToHome")}
+            </Link>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Product <span className="text-blue-600">Roadmap</span>
+              2024 <span className="text-blue-600">{getTranslation(currentLang, "roadmap2024")}</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              See what we're building next for VisaFlow CRM. Our roadmap is driven by customer feedback and industry
-              needs.
+              {getTranslation(currentLang, "roadmapHeroSubtitle")}
             </p>
-            <Link href="/contact">
-              <Button size="lg" className="text-lg px-8 py-3">
-                Request a Feature
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
@@ -40,232 +65,402 @@ export default function RoadmapPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            {/* Q1 2024 - Completed */}
+            {/* Q1 2024 */}
             <div className="relative">
               <div className="flex items-center mb-8">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mr-4">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mr-6">
+                  <CheckCircle className="h-6 w-6 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Q1 2024</h3>
-                  <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Completed</Badge>
+                  <h2 className="text-2xl font-bold text-gray-900">Q1 2024</h2>
+                  <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+                    {getTranslation(currentLang, "completed")}
+                  </Badge>
                 </div>
               </div>
 
-              <div className="ml-16 mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-l-4 border-l-green-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Core CRM Features</CardTitle>
-                      <CardDescription>
-                        Client management, application tracking, and basic reporting functionality
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
+              <div className="ml-18 grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Smartphone className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "customerPortal")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "customerPortalDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "applicationStatusTracking")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "documentUploadSystem")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "appointmentScheduling")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
 
-                  <Card className="border-l-4 border-l-green-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Document Management</CardTitle>
-                      <CardDescription>Secure document storage with encryption and access controls</CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-green-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Mobile App</CardTitle>
-                      <CardDescription>iOS and Android apps for on-the-go access to client information</CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-green-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Email Integration</CardTitle>
-                      <CardDescription>Automated email notifications and communication tracking</CardDescription>
-                    </CardHeader>
-                  </Card>
-                </div>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Smartphone className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "mobileApp")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "mobileAppDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "offlineSupport")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "pushNotifications")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "cameraIntegration")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
-            {/* Q2 2024 - In Progress */}
+            {/* Q2 2024 */}
             <div className="relative">
               <div className="flex items-center mb-8">
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mr-4">
-                  <Clock className="w-6 h-6 text-blue-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mr-6">
+                  <Zap className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Q2 2024</h3>
-                  <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">In Progress</Badge>
+                  <h2 className="text-2xl font-bold text-gray-900">Q2 2024</h2>
+                  <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                    {getTranslation(currentLang, "inDevelopment")}
+                  </Badge>
                 </div>
               </div>
 
-              <div className="ml-16 mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-l-4 border-l-blue-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Advanced Analytics</CardTitle>
-                      <CardDescription>
-                        Comprehensive dashboards with success rates, processing times, and revenue metrics
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
+              <div className="ml-18 grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Bot className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "aiAssistant")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "aiAssistantDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "automaticFormFilling")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "smartSuggestionSystem")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "chatbotSupport")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
 
-                  <Card className="border-l-4 border-l-blue-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">API Platform</CardTitle>
-                      <CardDescription>
-                        RESTful API for integrations with government portals and third-party services
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-blue-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Automated Workflows</CardTitle>
-                      <CardDescription>
-                        Custom workflow builder for automating repetitive tasks and processes
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-blue-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Multi-language Support</CardTitle>
-                      <CardDescription>Support for 10+ languages to serve diverse client bases</CardDescription>
-                    </CardHeader>
-                  </Card>
-                </div>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <BarChart3 className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "advancedAnalytics")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "advancedAnalyticsDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "realTimeDashboard")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "customizableReports")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "predictiveAnalysis")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
-            {/* Q3 2024 - Planned */}
+            {/* Q3 2024 */}
             <div className="relative">
               <div className="flex items-center mb-8">
-                <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mr-4">
-                  <Calendar className="w-6 h-6 text-orange-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full mr-6">
+                  <Calendar className="h-6 w-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Q3 2024</h3>
-                  <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-100">Planned</Badge>
+                  <h2 className="text-2xl font-bold text-gray-900">Q3 2024</h2>
+                  <Badge variant="secondary">{getTranslation(currentLang, "planned")}</Badge>
                 </div>
               </div>
 
-              <div className="ml-16 mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-l-4 border-l-orange-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">AI-Powered Insights</CardTitle>
-                      <CardDescription>
-                        Machine learning algorithms to predict application success rates and optimize processes
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
+              <div className="ml-18 grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Plug className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "apiIntegration")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "apiIntegrationDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "restApiDevelopment")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "webhookSupport")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "zapierIntegration")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
 
-                  <Card className="border-l-4 border-l-orange-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Video Consultations</CardTitle>
-                      <CardDescription>
-                        Built-in video calling for remote client consultations and interviews
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-orange-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Advanced Security</CardTitle>
-                      <CardDescription>Two-factor authentication, SSO, and enhanced audit trails</CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-orange-500">
-                    <CardHeader>
-                      <CardTitle className="text-lg">White-label Solution</CardTitle>
-                      <CardDescription>Customizable branding options for agencies and consultants</CardDescription>
-                    </CardHeader>
-                  </Card>
-                </div>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Languages className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "multiLanguageSupport")}</CardTitle>
+                        <CardDescription>
+                          {getTranslation(currentLang, "multiLanguageSupportDescription")}
+                        </CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "frenchAndGerman")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "spanishAndItalian")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "chineseAndJapanese")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
-            {/* Q4 2024 - Future */}
+            {/* Q4 2024 */}
             <div className="relative">
               <div className="flex items-center mb-8">
-                <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full mr-4">
-                  <Calendar className="w-6 h-6 text-gray-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full mr-6">
+                  <Calendar className="h-6 w-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Q4 2024</h3>
-                  <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">Future</Badge>
+                  <h2 className="text-2xl font-bold text-gray-900">Q4 2024</h2>
+                  <Badge variant="secondary">{getTranslation(currentLang, "planned")}</Badge>
                 </div>
               </div>
 
-              <div className="ml-16 mb-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-l-4 border-l-gray-400">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Blockchain Integration</CardTitle>
-                      <CardDescription>
-                        Secure, immutable document verification using blockchain technology
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
+              <div className="ml-18 grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Shield className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "blockchainIntegration")}</CardTitle>
+                        <CardDescription>
+                          {getTranslation(currentLang, "blockchainIntegrationDescription")}
+                        </CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "digitalSignatureSystem")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "documentVerification")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "secureDataSharing")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
 
-                  <Card className="border-l-4 border-l-gray-400">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Global Expansion</CardTitle>
-                      <CardDescription>Support for 50+ countries with localized forms and requirements</CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-gray-400">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Advanced Reporting</CardTitle>
-                      <CardDescription>
-                        Custom report builder with data visualization and export capabilities
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-
-                  <Card className="border-l-4 border-l-gray-400">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Mobile SDK</CardTitle>
-                      <CardDescription>
-                        Software development kit for building custom mobile applications
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                </div>
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Expand className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "globalExpansion")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "globalExpansionDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "europeanDataCenters")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "asiaPacificExpansion")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                        {getTranslation(currentLang, "localCompliance")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Request Section */}
-      <section className="py-20 bg-gray-50">
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Have a Feature Request?</h2>
-            <p className="text-xl text-gray-600 mb-8">
-              We're always looking for ways to improve VisaFlow CRM. If you have an idea for a new feature or
-              enhancement, we'd love to hear from you.
-            </p>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              {getTranslation(currentLang, "experienceTheFuture")}
+            </h2>
+            <p className="text-xl text-gray-600 mb-8">{getTranslation(currentLang, "digitalizeVisaOperations")}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg" className="text-lg px-8 py-3">
-                  Submit Feature Request
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
+                {getTranslation(currentLang, "freeTrial")}
+              </Button>
               <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-transparent">
-                Join Beta Program
+                {getTranslation(currentLang, "requestDemo")}
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <Footer locale={locale} />
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <Globe className="h-8 w-8 text-blue-400" />
+                <span className="text-xl font-bold">VisaFlow CRM</span>
+              </div>
+              <p className="text-gray-400">{getTranslation(currentLang, "crmSolutionForVisaOffices")}</p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">{getTranslation(currentLang, "product")}</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="/" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "homePage")}
+                  </Link>
+                </li>
+                <li>
+                  <a href="/#features" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "features")}
+                  </a>
+                </li>
+                <li>
+                  <a href="/#pricing" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "pricing")}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">{getTranslation(currentLang, "support")}</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "helpCenter")}
+                  </a>
+                </li>
+                <li>
+                  <a href="/#contact" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "contact")}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "apiDocumentation")}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">{getTranslation(currentLang, "company")}</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "aboutUs")}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "privacy")}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white transition-colors">
+                    {getTranslation(currentLang, "terms")}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 VisaFlow CRM. {getTranslation(currentLang, "allRightsReserved")}</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
