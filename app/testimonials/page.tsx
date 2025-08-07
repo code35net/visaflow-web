@@ -40,18 +40,18 @@ export default function TestimonialsPage() {
 
   // Customer logos data
   const customerLogos = [
-    { name: "Global Visa Services", logo: "/placeholder.svg?height=80&width=200&text=Global+Visa" },
-    { name: "EuroTravel Agency", logo: "/placeholder.svg?height=80&width=200&text=EuroTravel" },
-    { name: "Visa Express", logo: "/placeholder.svg?height=80&width=200&text=Visa+Express" },
-    { name: "International Consultancy", logo: "/placeholder.svg?height=80&width=200&text=International" },
-    { name: "TravelWise", logo: "/placeholder.svg?height=80&width=200&text=TravelWise" },
-    { name: "Visa Solutions", logo: "/placeholder.svg?height=80&width=200&text=Visa+Solutions" },
-    { name: "WorldBridge", logo: "/placeholder.svg?height=80&width=200&text=WorldBridge" },
-    { name: "Premier Visa", logo: "/placeholder.svg?height=80&width=200&text=Premier+Visa" },
-    { name: "Global Gateway", logo: "/placeholder.svg?height=80&width=200&text=Global+Gateway" },
-    { name: "Visa Masters", logo: "/placeholder.svg?height=80&width=200&text=Visa+Masters" },
-    { name: "Travel Connect", logo: "/placeholder.svg?height=80&width=200&text=Travel+Connect" },
-    { name: "Visa Pro", logo: "/placeholder.svg?height=80&width=200&text=Visa+Pro" },
+    { name: "Red And More", logo: "/references/redandmore.jpg?height=80&width=200&text=Global+Visa" },
+    { name: "Esmirna Visa", logo: "/references/esmirna.png?height=80&width=200&text=EuroTravel" },
+    { name: "Adventura Turizm", logo: "/references/adventura.png?height=80&width=200&text=Visa+Express" },
+    { name: "EDubai", logo: "/references/edubai.png?height=80&width=200&text=International" },
+    { name: "Ez Visas", logo: "/references/ezvisas.webp?height=80&width=200&text=TravelWise" },
+    { name: "Prism Visa", logo: "/references/prismvisa.png?height=80&width=200&text=Visa+Solutions" },
+    { name: "VisaHQ", logo: "/references/visahq.png?height=80&width=200&text=WorldBridge" },
+    { name: "Vizamaz", logo: "/references/vizamaz.png?height=80&width=200&text=Premier+Visa" },
+    { name: "Experience Qatar", logo: "/references/experience_qa.webp?height=80&width=200&text=Global+Gateway" },
+    { name: "Viisa Ekspert", logo: "/references/viisaekspert.svg?height=80&width=200&text=Visa+Masters" },
+    { name: "Gala Travel", logo: "/references/galatravel.png?height=80&width=200&text=Travel+Connect" },
+    { name: "Al Arab", logo: "/references/alarab.png?height=80&width=200&text=Visa+Pro" },
   ]
 
  
