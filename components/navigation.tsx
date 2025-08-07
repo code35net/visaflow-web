@@ -66,14 +66,18 @@ export function Navigation() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <LanguageSelector />
-            <Button variant="ghost">{getTranslation(currentLang, "login")}</Button>
-            <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "freeTrial")}</Button>
+            {/* <LanguageSelector /> */}
+            <Link
+                key="https://app.visaflow.tr/"
+                href="https://app.visaflow.tr/" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "login")}</Button>
+            </Link>
+            {/* <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "freeTrial")}</Button> */}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <LanguageSelector />
+            {/* <LanguageSelector /> */}
             <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>

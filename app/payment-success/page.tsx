@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation"
 import { getTranslation, type Language } from "@/lib/translations"
 
 function PaymentSuccessContent() {
-  const [orderNumber] = useState(() => "VF-" + Math.random().toString(36).substr(2, 9).toUpperCase())
+  const [orderNumber] = useState(() => "CD-" + "VF"+ Math.random().toString(36).substr(2, 9).toUpperCase())
   const searchParams = useSearchParams()
   const plan = searchParams.get("plan") || "monthly"
 

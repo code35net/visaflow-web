@@ -9,53 +9,131 @@ export const translations = {
     contact: "İletişim",
     login: "Giriş Yap",
     freeTrial: "Ücretsiz Dene",
+    justOneDay: "Sadece 1 Günde Kurulum",
 
     // Hero
     heroTitle: "Vize başvuru operasyonlarınızı kolaylaştırın",
     heroSubtitle:
       "Müşteri takibi, başvuru yönetimi ve randevu sistemi ile vize ofis süreçlerinizi dijitalleştirin. Küçük ve orta ölçekli vize ofisleri için özel tasarlandı.",
-    startFreeTrial: "Ücretsiz Denemeyi Başlat",
+    startFreeTrial: "Hemen iletişime geçin",
     watchDemo: "Demo İzle",
+    quickRegister: "Hızlı Kayıt",
+    reporting: "Raporlama",
+    activeOffice: "Aktif Vize Ofisi",
+    applied: "İşlenen Başvuru",
+    customerRespect: "Müşteri Memnuniyeti",
+
+    //Main Features
+mainHeader: "Vize ofisleriniz için her şey bir arada",
+mainText: "Müşteri yönetiminden başvuru takibine, randevu sisteminden raporlamaya kadar tüm ihtiyaçlarınızı karşılayan ve size en doğru raporlamayı sunan kapsamlı CRM çözümü.",
+customerManage: "Müşteri Yönetimi",
+customerDesc1: "Tüm müşteri bilgilerini tek yerden yönetin ve takip edin.",
+customerDesc2: "Detaylı müşteri profilleri",
+customerDesc3: "İletişim geçmişi takibi",
+customerDesc4: "Vize geçmişi",
+
+applicationManage: "Başvuru Takibi",
+applicationDesc1: "Vize başvurularını adım adım takip edin ve yönetin.",
+applicationDesc2: "Başvuru durumu takibi",
+applicationDesc3: "Belge Yönetimi",
+applicationDesc4: "Otomatik bildirimler",
+
+reservationManage: "Randevu Sistemi",
+reservationDesc1: "Akıllı randevu planlama ve takvim entegrasyonu",
+reservationDesc2: "Online randevu alma",
+reservationDesc3: "Takvim senkronizasyonu",
+reservationDesc4: "SMS/Email hatırlatma",
+
+
+//Detailed Features
+featuresTitle: "Güçlü özellikler, kolay kullanım",
+  feature1Title: "Güvenli Belge Saklama",
+  "feature1Desc": "Müşteri belgelerini güvenli şekilde saklayın ve yönetin",
+  "feature1List1": "• SSL şifreleme",
+  "feature1List2": "• Otomatik yedekleme",
+  "feature1List3": "• Erişim kontrolü",
+
+  "feature2Title": "Raporlama & Analitik",
+  "feature2Desc": "Detaylı raporlar ve analizlerle işinizi büyütün",
+  "feature2List1": "• Performans raporları",
+  "feature2List2": "• Gelir analizi",
+  "feature2List3": "• Müşteri istatistikleri",
+
+  "feature3Title": "Çok Kullanıcılı Sistem",
+  "feature3Desc": "Ekibinizle birlikte çalışın, yetkileri yönetin",
+  "feature3List1": "• Rol tabanlı erişim",
+  "feature3List2": "• Ekip yönetimi",
+  "feature3List3": "• Aktivite takibi",
+
+  "feature4Title": "Otomatik Hatırlatmalar",
+  "feature4Desc": "Önemli tarihleri kaçırmayın, otomatik bildirimler alın",
+  "feature4List1": "• Randevu hatırlatmaları",
+  "feature4List2": "• Belge son tarihleri",
+  "feature4List3": "• Takip bildirimleri",
+
+  "feature5Title": "Çoklu Dil Desteği",
+  "feature5Desc": "6 farklı dilde hizmet verin, global müşterilere ulaşın",
+  "feature5List1": "• İngilizce, Türkçe, Arapça",
+  "feature5List2": "• Rusça, Estonca",
+  "feature5List3": "• RTL dil desteği",
+
+  "feature6Title": "Akıllı Formlar",
+  "feature6Desc": "Özelleştirilebilir formlarla veri toplama sürecini hızlandırın",
+  "feature6List1": "• Dinamik form oluşturma",
+  "feature6List2": "• Otomatik validasyon",
+  "feature6List3": "• Mobil uyumlu",
+
 
     // Pricing
     monthlyPlan: "Aylık Plan",
+    month: "Ay",
     yearlyPlan: "Yıllık Plan",
+    year: "Yıl",
     additionalUser: "Ek Kullanıcı",
     selectPlan: "Planı Seç",
     buyNow: "Satın Al",
-    simpleTransparentPricing: "Basit ve şeffaf fiyatlandırma",
+    simpleTransparentPricing: "Fiyatlandırma",
     pricingSubtitle:
-      "14 günlük ücretsiz deneme ile başlayın. Kredi kartı gerekmez. İstediğiniz zaman iptal edebilirsiniz.",
-    first100Customers: "İlk 100 müşteriye %30 indirim",
-    smallOfficesIdeal: "Küçük ofisler için ideal",
+      "Vize operasyonlarınız için ihtiyacınız olan herşey VisaFlow CRM ile.",
+    first100Customers: "Üstelik yıllık ödemelerde %20 indirim ve peşin fiyatına 3 taksit fırsatı",
+    smallOfficesIdeal: "Başlangıç için ideal",
     growingOfficesBest: "Büyüyen ofisler için en iyi seçim",
     expandYourTeam: "Ekibinizi büyütün",
     mostPopular: "En Popüler",
-    discount20: "%20 İndirim - 2 Ay Ücretsiz",
+    discount20: "%20 İndirim - 2 Ay Ücretsiz - 3 Taksit",
     unlimitedCustomers: "Sınırsız müşteri kaydı",
-    allBasicFeatures: "Tüm temel özellikler",
+    allBasicFeatures: "Sınırsız Başvuru",
     emailSupport: "Email desteği",
-    storage5GB: "5 GB belge depolama",
+    storage5GB: "1 Kullanıcı",
     basicReporting: "Temel raporlama",
     prioritySupport: "Öncelikli destek",
     apiAccess: "API erişimi",
     allPremiumFeatures: "Tüm premium özellikler",
     priority24Support: "Öncelikli destek (24/7)",
-    storage50GB: "50 GB belge depolama",
+    storage50GB: "2 Kullanıcı",
     advancedReporting: "Gelişmiş raporlama",
-    freeTrainingSetup: "Ücretsiz eğitim ve kurulum",
+    freeTrainingSetup: "Ücretsiz eğitim",
     fullSystemAccess: "Tam sistem erişimi",
     roleBasedAuth: "Rol tabanlı yetkilendirme",
     personalDashboard: "Kişisel dashboard",
-    activityTracking: "Aktivite takibi",
-    individualReporting: "Bireysel raporlama",
-    mobileAppAccess: "Mobil uygulama erişimi",
+    activityTracking: "Tüm Özelliklere Sahip",
+    individualReporting: "Planınıza ek",
+    mobileAppAccess: "Yıllık alımlarda indirimli",
     addUser: "Kullanıcı Ekle",
     additionalToPlan: "Mevcut plana ek olarak",
-    freeTrial14Days: "14 günlük ücretsiz deneme",
+    freeTrial14Days:  "14 günlük ücretsiz deneme",
+    "pricingNotes": "Fiyatlandırma Notları",
+  "taxesTitle": "KDV ve Vergiler",
+  "taxesDescription": "Tüm fiyatlara %20 KDV eklenecektir. Türkiye dışındaki müşteriler için yerel vergi oranları uygulanır.",
+  "paymentMethodsTitle": "Ödeme Yöntemleri",
+  "paymentMethodsDescription": "Visa, Mastercard, American Express kabul edilir. Güvenli ödeme için SSL şifreleme kullanılır.",
+  "cancellationTitle": "İptal Politikası",
+  "cancellationDescription": "İstediğiniz zaman iptal edebilirsiniz. İptal sonrası verileriniz 6 ay boyunca saklanır.",
+  "supportTitle": "Destek",
+  "supportDescription": "Tüm planlar email desteği içerir. Yıllık plan müşterileri öncelikli telefon desteği alır.",
 
     // Features
-    powerfulFeatures: "Güçlü özellikler",
+    powerfulFeatures: "Tüm Özellikler",
     featuresHeroSubtitle:
       "VisaFlow CRM'in sunduğu kapsamlı özellikler ile vize ofis operasyonlarınızı tamamen dijitalleştirin.",
     backToHome: "Ana Sayfaya Dön",
@@ -105,7 +183,7 @@ export const translations = {
     adminOperatorCustomerRepresentativeRoles: "Admin, operatör, müşteri temsilcisi rolleri",
     teamManagement: "Ekip Yönetimi",
     addUserRemoveAndEditPermissions: "Kullanıcı ekleme, çıkarma ve izin düzenleme",
-    activityTracking: "Aktivite Takibi",
+    
     whoDidWhatWhenFullAudit: "Kim ne yaptı, ne zaman - tam denetim",
     moreFeatures: "Daha Fazla Özellik",
     additionalFeaturesToSimplifyYourBusinessWithVisaFlowCrm: "VisaFlow CRM ile işinizi kolaylaştıracak ek özellikler",
@@ -117,18 +195,16 @@ export const translations = {
     dataProtectionStandards: "Veri koruma standartları",
     fastPerformance: "Hızlı Performans",
     loadingInSeconds: "Saniyeler içinde yükleme",
-    tryAllFeaturesFree: "Tüm özellikleri ücretsiz deneyin",
-    discoverAllFeaturesWith14DayFreeTrial: "14 günlük ücretsiz deneme ile tüm özellikleri keşfedin",
-    startFreeTrial: "Ücretsiz Denemeyi Başlat",
+    tryAllFeaturesFree: "Tüm özellikleri ile birlikte",
+    discoverAllFeaturesWith14DayFreeTrial: "Sadece 1 günde güçlü bir CRM yazılımı sahibi olabilirsiniz.",
+    
     requestDemo: "Demo Talep Et",
     crmSolutionDesignedForVisaOffices: "Vize ofisleri için tasarlanmış CRM çözümü",
     product: "Ürün",
-    features: "Özellikler",
-    pricing: "Fiyatlandırma",
-    roadmap: "Yol Haritası",
+    
     support: "Destek",
     helpCenter: "Yardım Merkezi",
-    contact: "İletişim",
+    
     apiDocumentation: "API Dokümantasyonu",
     company: "Şirket",
     aboutUs: "Hakkımızda",
@@ -143,10 +219,12 @@ export const translations = {
     phoneSupport: "Telefon Desteği",
     mondayFriday: "Pazartesi - Cuma",
     callNow: "Hemen Ara",
-    emailSupport: "Email Desteği",
+    
     response24Hours: "24 saat içinde yanıt garantisi",
     sendEmail: "Email Gönder",
     liveSupport: "Canlı Destek",
+    supportStatusOn: "Çevrimiçi",
+    supportStatusOff: "Çevrimdışı",
     instantHelp: "Anında yardım alın",
     online: "Online",
     startChat: "Sohbet Başlat",
@@ -155,18 +233,18 @@ export const translations = {
     firstName: "Ad",
     lastName: "Soyad",
     email: "Email",
-    company: "Şirket",
+    
     phone: "Telefon",
     subject: "Konu",
     selectSubject: "Konu seçin",
     demoRequest: "Demo Talebi",
-    pricing: "Fiyatlandırma",
+    
     technicalSupport: "Teknik Destek",
     partnership: "Ortaklık",
     other: "Diğer",
     yourMessage: "Mesajınızı buraya yazın...",
     sendMessageBtn: "Mesaj Gönder",
-    phoneSupportHours: "Pazartesi - Cuma: 09:00 - 18:00",
+    phoneSupportHours: "Haftaiçi: 09:00 - 18:00",
     emailResponseGuarantee: "24 saat içinde yanıt garantisi",
     formDescription: "Formu doldurun, size en kısa sürede dönüş yapalım",
     firstNamePlaceholder: "Adınız",
@@ -185,11 +263,11 @@ export const translations = {
     instant: "Anında",
     ctaTitle: "Hemen başlayın",
     ctaSubtitle: "14 günlük ücretsiz deneme ile VisaFlow CRM'i risk almadan test edin",
-    freeTrial: "Ücretsiz Deneme",
-    requestDemo: "Demo Talep Et",
+    
+    
     footerDescription: "Vize ofisleri için özel tasarlanmış CRM çözümü",
     documentation: "Dokümantasyonu",
-    allRightsReserved: "Tüm hakları saklıdır",
+ 
     findUs: "Bizi Bulun",
     visitOffice: "Ofisimizi ziyaret edin veya harita üzerinden konumumuzu görün",
     mainOffice: "Ana Ofis",
@@ -199,7 +277,7 @@ export const translations = {
     currentlyOpen: "Şu anda açık",
 
     // Roadmap
-    roadmap2024: "2024 Yol Haritası",
+    roadmap2024: "Yol Haritası",
     roadmapHeroSubtitle:
       "VisaFlow CRM'in geleceğini keşfedin. Yeni özellikler, iyileştirmeler ve inovasyonlarla dolu bir yıl bizi bekliyor.",
     completed: "Tamamlandı",
@@ -247,8 +325,7 @@ export const translations = {
     localCompliance: "Yerel uyumluluk",
     experienceTheFuture: "Geleceği Deneyimleyin",
     digitalizeVisaOperations: "Vize operasyonlarınızı dijitalleştirin",
-    freeTrial: "Ücretsiz Deneme",
-    requestDemo: "Demo Talep Et",
+    
     crmSolutionForVisaOffices: "Vize ofisleri için CRM çözümü",
     homePage: "Ana Sayfa",
 
@@ -266,15 +343,11 @@ export const translations = {
     total: "Toplam",
     personalInformation: "Kişisel Bilgiler",
     personalInformationDescription: "Fatura ve iletişim bilgilerinizi girin",
-    firstName: "Ad",
-    firstNamePlaceholder: "Adınız",
-    lastName: "Soyad",
-    lastNamePlaceholder: "Soyadınız",
-    company: "Şirket",
+    
     companyPlaceholder: "Şirket adınız",
     billingAddress: "Fatura Adresi",
     billingAddressDescription: "Fatura gönderilecek adres bilgileri",
-    address: "Adres",
+    
     addressPlaceholder: "Tam adresiniz",
     city: "Şehir",
     cityPlaceholder: "Şehir adı",
@@ -322,7 +395,7 @@ export const translations = {
     downloadInvoice: "Faturayı İndir",
     questions: "Sorularınız için ",
     contactSupport: "destek ekibimizle iletişime geçin",
-    emailSupport: "Email Desteği",
+    
     responseTime: "24 saat içinde yanıt",
     freeTraining: "Ücretsiz Eğitim",
     personalizedSetup: "Kişiselleştirilmiş kurulum",
@@ -348,32 +421,30 @@ export const translations = {
     tryDifferentCardDescription: "Başka bir kredi kartı veya banka kartı ile ödeme yapın",
     callYourBank: "Bankanızı Arayın",
     callYourBankDescription: "Online ödemeler için bankanızdan izin alın",
-    contactSupport: "Destek Ekibiyle İletişime Geçin",
+    
     contactSupportDescription: "Sorun devam ederse uzman ekibimizden yardım alın",
     commonIssues: "Yaygın Sorunlar",
     solution: "Çözüm",
     stillHavingTrouble: "Hala Sorun mu Yaşıyorsunuz?",
     supportTeamHere: "Destek ekibimiz burada size yardımcı olmak için",
-    phoneSupport: "Telefon Desteği",
-    mondayFriday: "Pazartesi - Cuma",
-    emailSupport: "Email Desteği",
+    
     responseWithin24: "24 saat içinde yanıt",
     contactSupportTeam: "Destek Ekibiyle İletişime Geç",
-    callNow: "Hemen Ara",
+    
 
     // Common
-    backToHome: "Ana Sayfaya Dön",
+    
     getStartedNow: "Hemen başlayın",
     startFreeTrial14: "14 Günlük Ücretsiz Deneme",
-    requestDemo: "Demo Talep Et",
-    noCreditCard: "Kredi kartı gerekmez",
+    
+    noCreditCard: "Dilediğiniz gibi ödeyin",
     cancelAnytime: "İstediğiniz zaman iptal edin",
-    support24_7: "24/7 destek",
+    support24_7: "Destek alın",
     faq: "Sıkça Sorulan Sorular",
     pricingFAQ: "Fiyatlandırma ile ilgili merak ettikleriniz",
-    howFreeTrialWorks: "Ücretsiz deneme nasıl çalışır?",
+    howFreeTrialWorks: "Nasıl demo alabilirim?",
     freeTrialAnswer:
-      "14 gün boyunca tüm özellikleri ücretsiz kullanabilirsiniz. Kredi kartı bilgisi gerekmez. Deneme süresi sonunda otomatik ücretlendirme yapılmaz.",
+      "Satış ekibimizle iletişime geçerek demo gösterimine erişebilirsiniz.",
     canChangePlan: "Plan değişikliği yapabilir miyim?",
     changePlanAnswer:
       "Evet, istediğiniz zaman planınızı yükseltebilir veya düşürebilirsiniz. Değişiklik bir sonraki fatura döneminde geçerli olur.",
@@ -385,14 +456,20 @@ export const translations = {
       "Hayır, hiçbir kurulum ücreti yoktur. Yıllık plan müşterilerimize ücretsiz kurulum desteği ve eğitim sağlıyoruz.",
     howManyUsers: "Kaç kullanıcı ekleyebilirim?",
     usersAnswer:
-      "Sınırsız kullanıcı ekleyebilirsiniz. Her ek kullanıcı için aylık €2 ücret alınır. İlk kullanıcı plan fiyatına dahildir.",
+      "Mevcut planlarınıa ek olarak her ek kullanıcı için aylık €2 ücret ödeyerek sınırsız kullanıcı ekleyebilirsiniz.",
     supportService: "Destek hizmeti nasıl?",
     supportAnswer:
       "Aylık plan müşterileri email desteği alır. Yıllık plan müşterileri 24/7 öncelikli telefon ve email desteği alır.",
 
     // Testimonials için yeni çeviriler ekleyin
-    testimonials: "Referanslar",
-    trustedByExperts: "Uzmanlar tarafından güveniliyor",
+    
+  "noRisk": "hiçbir risk yok",
+  
+  "testWithoutRisk": "Veri kayıpları yaşamayın, risk almayın VisaFlow CRM'e terfi edin.",
+  
+  "contactSalesTeam": "Satış Ekibiyle Konuşun",
+  
+    trustedByExperts: "Referanslarımız",
     testimonialsHeroSubtitle:
       "Dünya çapında 150+ vize ofisi VisaFlow CRM ile operasyonlarını yönetiyor. Onların başarı hikayelerini keşfedin.",
     averageRating: "ortalama puan",
@@ -407,7 +484,7 @@ export const translations = {
     whatCustomersSay: "Müşterilerimiz ne diyor?",
     realExperiencesFromUsers: "Gerçek kullanıcılardan gerçek deneyimler",
     successStories: "Başarı Hikayeleri",
-    howBusinessesGrow: "İşletmeler VisaFlow CRM ile nasıl büyüyor",
+    howBusinessesGrow: "VisaFlow CRM işletmeleri nasıl büyütüyor",
     productivityIncrease: "Verimlilik Artışı",
     averageProductivityIncrease: "Ortalama verimlilik artışı",
     higherCustomerSatisfaction: "Daha yüksek müşteri memnuniyeti",

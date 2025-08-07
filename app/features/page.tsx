@@ -21,6 +21,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 
 export default function FeaturesPage() {
   const [currentLang, setCurrentLang] = useState<Language>("tr")
@@ -46,10 +47,7 @@ export default function FeaturesPage() {
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              {getTranslation(currentLang, "backToHome")}
-            </Link>
+            
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               {getTranslation(currentLang, "powerfulFeatures")}
             </h1>
@@ -367,95 +365,14 @@ export default function FeaturesPage() {
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
                 {getTranslation(currentLang, "startFreeTrial")}
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-transparent">
-                {getTranslation(currentLang, "requestDemo")}
-              </Button>
+              
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Globe className="h-8 w-8 text-blue-400" />
-                <span className="text-xl font-bold">VisaFlow CRM</span>
-              </div>
-              <p className="text-gray-400">{getTranslation(currentLang, "crmSolutionDesignedForVisaOffices")}</p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">{getTranslation(currentLang, "product")}</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/features" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "features")}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "pricing")}
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/roadmap" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "roadmap")}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">{getTranslation(currentLang, "support")}</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "helpCenter")}
-                  </a>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "contact")}
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "apiDocumentation")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">{getTranslation(currentLang, "company")}</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "aboutUs")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "privacy")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {getTranslation(currentLang, "terms")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 VisaFlow CRM. {getTranslation(currentLang, "allRightsReserved")}.</p>
-          </div>
-        </div>
-      </footer>
+      
+      <Footer />
     </div>
   )
 }

@@ -60,18 +60,18 @@ function CheckoutContent() {
   const planDetails = {
     monthly: {
       name: "Aylık Plan",
-      basePrice: 69,
-      price: "€82.80",
+      basePrice: 72.45,
+      price: "€ 72.45",
       period: "/ ay",
       description: "Küçük ofisler için ideal",
       features: ["Sınırsız müşteri", "Tüm temel özellikler", "Email desteği", "5 GB depolama"],
     },
     yearly: {
       name: "Yıllık Plan",
-      basePrice: 662,
-      price: "€794.40",
+      basePrice: 695.52,
+      price: "€ 695.52",
       period: "/ yıl",
-      originalPrice: "€993.60",
+      originalPrice: "€ 869.40",
       originalBasePrice: 828,
       discount: "%20 İndirim",
       description: "En popüler seçim",
@@ -80,7 +80,7 @@ function CheckoutContent() {
     additional: {
       name: "Ek Kullanıcı",
       basePrice: 2,
-      price: "€2.40",
+      price: "€ 2",
       period: "/ kullanıcı / ay",
       description: "Ekibinizi büyütün",
       features: ["Tam sistem erişimi", "Rol tabanlı yetkilendirme", "Kişisel dashboard", "Aktivite takibi"],
@@ -187,14 +187,14 @@ function CheckoutContent() {
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="font-semibold">{currentPlan.name}</h3>
-                        <p className="text-sm text-gray-600">{currentPlan.description}</p>
+                        
                       </div>
                       <div className="text-right">
-                        {currentPlan.originalPrice && (
+                        {"originalBasePrice" in currentPlan && (
                           <div className="text-sm text-gray-400 line-through">{currentPlan.originalPrice}</div>
                         )}
-                        <div className="font-bold text-lg">{currentPlan.price}</div>
-                        <div className="text-sm text-gray-600">{currentPlan.period}</div>
+                        <div className="font-bold text-lg">{currentPlan.price} {currentPlan.period}</div>
+                        
                       </div>
                     </div>
 
@@ -227,12 +227,12 @@ function CheckoutContent() {
                       </div>
                       <p className="text-sm text-blue-700">
                         {additionalUsers > 0
-                          ? `${additionalUsers} ${getTranslation(currentLang, "additionalUsers")} × €2.40 = €${(additionalUsers * 2.4).toFixed(2)}`
+                          ? `${additionalUsers} ${getTranslation(currentLang, "additionalUsers")} × €2 = €${(additionalUsers * 2).toFixed(2)}`
                           : getTranslation(currentLang, "noAdditionalUsers")}
                       </p>
                     </div>
 
-                    {currentPlan.discount && (
+                    {"discount" in currentPlan && (
                       <Badge className="bg-green-100 text-green-800 hover:bg-green-100">{currentPlan.discount}</Badge>
                     )}
 
