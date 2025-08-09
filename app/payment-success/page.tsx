@@ -8,39 +8,39 @@ import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Download, Mail, Calendar, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { getTranslation, type Language } from "@/lib/translations"
+import { getTranslation, type Language, type TranslationKey } from "@/lib/translations"
 
 function PaymentSuccessContent() {
-  const [orderNumber] = useState(() => "CD-" + "VF"+ Math.random().toString(36).substr(2, 9).toUpperCase())
+  const [orderNumber] = useState(
+    () => "CD-VF-" + Math.random().toString(36).slice(2, 11).toUpperCase()
+  )
   const searchParams = useSearchParams()
-  const plan = searchParams.get("plan") || "monthly"
+  const plan = (searchParams.get("plan") as "monthly" | "yearly" | "additional") || "monthly"
 
   const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const t = (key: TranslationKey) => getTranslation(currentLang, key)
 
   useEffect(() => {
     const savedLang = localStorage.getItem("language") as Language
     if (savedLang) setCurrentLang(savedLang)
-
-    const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
-
+    const handleLanguageChange = (event: CustomEvent) => setCurrentLang(event.detail as Language)
     window.addEventListener("languageChange", handleLanguageChange as EventListener)
     return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
   }, [])
 
-  const planDetails = {
-    monthly: { name: "Aylık Plan", basePrice: 69, price: "€82.80", period: "/ ay" },
-    yearly: { name: "Yıllık Plan", basePrice: 662, price: "€794.40", period: "/ yıl" },
-    additional: { name: "Ek Kullanıcı", basePrice: 2, price: "€2.40", period: "/ kullanıcı / ay" },
+  // Plan adlarını i18n'den çek
+  const planNameKeyMap: Record<typeof plan, TranslationKey> = {
+    monthly: "pricing.monthlyPlan",
+    yearly: "pricing.yearlyPlan",
+    additional: "pricing.additionalUser",
   }
+  const currentPlanName = t(planNameKeyMap[plan])
 
-  const currentPlan = planDetails[plan as keyof typeof planDetails]
   const users = searchParams.get("users") || "1"
-  const totalAmount = searchParams.get("total") || currentPlan.price.replace("€", "")
+  const totalAmount = searchParams.get("total") || ""
 
   useEffect(() => {
-    // Send confirmation email (simulation)
+    // confirmation e-mail simülasyonu
     console.log("Confirmation email sent for order:", orderNumber)
   }, [orderNumber])
 
@@ -56,11 +56,11 @@ function PaymentSuccessContent() {
               <CheckCircle className="h-10 w-10 text-green-600" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "paymentSuccessful")} 🎉
+              {t("paymentSuccess.title")} 🎉
             </h1>
-            <p className="text-xl text-gray-600 mb-8">{getTranslation(currentLang, "congratulations")}</p>
+            <p className="text-xl text-gray-600 mb-8">{t("paymentSuccess.congratulations")}</p>
             <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg px-4 py-2">
-              {getTranslation(currentLang, "orderNumber")}: {orderNumber}
+              {t("paymentSuccess.orderNumber")}: {orderNumber}
             </Badge>
           </div>
         </div>
@@ -74,39 +74,43 @@ function PaymentSuccessContent() {
               {/* Order Summary */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{getTranslation(currentLang, "orderDetails")}</CardTitle>
-                  <CardDescription>{getTranslation(currentLang, "planDetails")}</CardDescription>
+                  <CardTitle>{t("paymentSuccess.orderDetails")}</CardTitle>
+                  <CardDescription>{t("paymentSuccess.planDetails")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
                     <div>
-                      <h3 className="font-semibold text-lg">{currentPlan.name}</h3>
-                      <p className="text-gray-600">{getTranslation(currentLang, "freeTrial")}</p>
+                      <h3 className="font-semibold text-lg">{currentPlanName}</h3>
+                      <p className="text-gray-600">{t("pricing.freeTrial14Days")}</p>
                       {plan === "additional" && (
                         <p className="text-sm text-blue-600">
-                          {users} {getTranslation(currentLang, "users")}
+                          {users} {t("paymentSuccess.users")}
                         </p>
                       )}
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-xl text-blue-600">€{totalAmount}</div>
-                      <div className="text-sm text-gray-600">{getTranslation(currentLang, "vatIncluded")}</div>
+                      <div className="font-bold text-xl text-blue-600">
+                        {totalAmount ? `€${totalAmount}` : "—"}
+                      </div>
+                      <div className="text-sm text-gray-600">{t("paymentSuccess.vatIncluded")}</div>
                     </div>
                   </div>
 
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span>{getTranslation(currentLang, "orderDate")}:</span>
-                      <span>{new Date().toLocaleDateString("tr-TR")}</span>
+                      <span>{t("paymentSuccess.orderDate")}:</span>
+                      <span>
+                        {new Date().toLocaleDateString(currentLang === "tr" ? "tr-TR" : "en-US")}
+                      </span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{getTranslation(currentLang, "paymentMethod")}:</span>
-                      <span>{getTranslation(currentLang, "creditCard")}</span>
+                      <span>{t("paymentSuccess.paymentMethod")}:</span>
+                      <span>{t("paymentSuccess.creditCard")}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{getTranslation(currentLang, "status")}:</span>
+                      <span>{t("paymentSuccess.status")}:</span>
                       <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
-                        {getTranslation(currentLang, "active")}
+                        {t("paymentSuccess.active")}
                       </Badge>
                     </div>
                   </div>
@@ -116,8 +120,8 @@ function PaymentSuccessContent() {
               {/* Next Steps */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{getTranslation(currentLang, "nextSteps")}</CardTitle>
-                  <CardDescription>{getTranslation(currentLang, "startUsing")}</CardDescription>
+                  <CardTitle>{t("paymentSuccess.nextSteps")}</CardTitle>
+                  <CardDescription>{t("paymentSuccess.startUsing")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-4">
@@ -126,8 +130,10 @@ function PaymentSuccessContent() {
                         <span className="text-blue-600 font-semibold text-sm">1</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">{getTranslation(currentLang, "emailCheck")}</h4>
-                        <p className="text-sm text-gray-600">{getTranslation(currentLang, "emailCheckDescription")}</p>
+                        <h4 className="font-semibold">{t("paymentSuccess.emailCheck")}</h4>
+                        <p className="text-sm text-gray-600">
+                          {t("paymentSuccess.emailCheckDescription")}
+                        </p>
                       </div>
                     </div>
 
@@ -136,9 +142,9 @@ function PaymentSuccessContent() {
                         <span className="text-blue-600 font-semibold text-sm">2</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">{getTranslation(currentLang, "accountSetup")}</h4>
+                        <h4 className="font-semibold">{t("paymentSuccess.accountSetup")}</h4>
                         <p className="text-sm text-gray-600">
-                          {getTranslation(currentLang, "accountSetupDescription")}
+                          {t("paymentSuccess.accountSetupDescription")}
                         </p>
                       </div>
                     </div>
@@ -148,8 +154,10 @@ function PaymentSuccessContent() {
                         <span className="text-blue-600 font-semibold text-sm">3</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">{getTranslation(currentLang, "dataImport")}</h4>
-                        <p className="text-sm text-gray-600">{getTranslation(currentLang, "dataImportDescription")}</p>
+                        <h4 className="font-semibold">{t("paymentSuccess.dataImport")}</h4>
+                        <p className="text-sm text-gray-600">
+                          {t("paymentSuccess.dataImportDescription")}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -162,18 +170,18 @@ function PaymentSuccessContent() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
                   <ArrowRight className="mr-2 h-5 w-5" />
-                  {getTranslation(currentLang, "goToDashboard")}
+                  {t("paymentSuccess.goToDashboard")}
                 </Button>
                 <Button size="lg" variant="outline" className="bg-transparent">
                   <Download className="mr-2 h-5 w-5" />
-                  {getTranslation(currentLang, "downloadInvoice")}
+                  {t("paymentSuccess.downloadInvoice")}
                 </Button>
               </div>
 
               <p className="text-sm text-gray-600">
-                {getTranslation(currentLang, "questions")}
+                {t("paymentSuccess.questions")}
                 <Link href="/contact" className="text-blue-600 hover:underline">
-                  {getTranslation(currentLang, "contactSupport")}
+                  {t("paymentSuccess.contactSupport")}
                 </Link>
               </p>
             </div>
@@ -182,23 +190,23 @@ function PaymentSuccessContent() {
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="text-center p-6">
                 <Mail className="h-8 w-8 text-blue-600 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{getTranslation(currentLang, "emailSupport")}</h3>
+                <h3 className="font-semibold mb-2">{t("pricing.emailSupport")}</h3>
                 <p className="text-sm text-gray-600">support@visaflowcrm.com</p>
-                <p className="text-xs text-gray-500 mt-1">{getTranslation(currentLang, "responseTime")}</p>
+                <p className="text-xs text-gray-500 mt-1">{t("paymentSuccess.responseTime")}</p>
               </Card>
 
               <Card className="text-center p-6">
                 <Calendar className="h-8 w-8 text-blue-600 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{getTranslation(currentLang, "freeTraining")}</h3>
-                <p className="text-sm text-gray-600">{getTranslation(currentLang, "personalizedSetup")}</p>
-                <p className="text-xs text-gray-500 mt-1">{getTranslation(currentLang, "annualPlanCustomers")}</p>
+                <h3 className="font-semibold mb-2">{t("paymentSuccess.freeTraining")}</h3>
+                <p className="text-sm text-gray-600">{t("paymentSuccess.personalizedSetup")}</p>
+                <p className="text-xs text-gray-500 mt-1">{t("paymentSuccess.annualPlanCustomers")}</p>
               </Card>
 
               <Card className="text-center p-6">
                 <CheckCircle className="h-8 w-8 text-blue-600 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{getTranslation(currentLang, "dataSecurity")}</h3>
-                <p className="text-sm text-gray-600">256-bit SSL şifreleme</p>
-                <p className="text-xs text-gray-500 mt-1">GDPR uyumlu</p>
+                <h3 className="font-semibold mb-2">{t("paymentSuccess.dataSecurity")}</h3>
+                <p className="text-sm text-gray-600">256-bit SSL</p>
+                <p className="text-xs text-gray-500 mt-1">GDPR</p>
               </Card>
             </div>
           </div>

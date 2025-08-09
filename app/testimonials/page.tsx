@@ -54,9 +54,6 @@ export default function TestimonialsPage() {
     { name: "Al Arab", logo: "/references/alarab.png?height=80&width=200&text=Visa+Pro" },
   ]
 
- 
-  
-
   // Auto-rotate logos
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,11 +61,6 @@ export default function TestimonialsPage() {
     }, 3000)
     return () => clearInterval(interval)
   }, [customerLogos.length])
-
-  // Auto-rotate testimonials
-
-  
-
 
   const getVisibleLogos = () => {
     const logosPerSlide = 6
@@ -85,22 +77,21 @@ export default function TestimonialsPage() {
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "trustedByExperts")}
+              {getTranslation(currentLang, "testimonials.title")}
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              {getTranslation(currentLang, "testimonialsHeroSubtitle")}
+              {getTranslation(currentLang, "testimonials.heroSubtitle")}
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg px-4 py-2">
-                ⭐ 4.9/5 {getTranslation(currentLang, "averageRating")}
+                ⭐ 4.9/5 {getTranslation(currentLang, "testimonials.averageRating")}
               </Badge>
               <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-lg px-4 py-2">
-                🏢 150+ {getTranslation(currentLang, "activeOffices")}
+                🏢 150+ {getTranslation(currentLang, "testimonials.activeVisaOffices")}
               </Badge>
               <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-100 text-lg px-4 py-2">
-                📈 98% {getTranslation(currentLang, "customerSatisfaction")}
+                📈 98% {getTranslation(currentLang, "testimonials.customerSatisfaction")}
               </Badge>
             </div>
           </div>
@@ -112,9 +103,11 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "trustedByLeadingCompanies")}
+              {getTranslation(currentLang, "testimonials.trustedByLeadingCompanies")}
             </h2>
-            <p className="text-gray-600">{getTranslation(currentLang, "joinSuccessfulBusinesses")}</p>
+            <p className="text-gray-600">
+              {getTranslation(currentLang, "testimonials.joinSuccessfulBusinesses")}
+            </p>
           </div>
 
           <div className="relative overflow-hidden">
@@ -151,18 +144,16 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-     
-
-     
-
       {/* Success Stories Grid */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "successStories")}
+              {getTranslation(currentLang, "testimonials.successStories")}
             </h2>
-            <p className="text-xl text-gray-600">{getTranslation(currentLang, "howBusinessesGrow")}</p>
+            <p className="text-xl text-gray-600">
+              {getTranslation(currentLang, "testimonials.howBusinessesGrow")}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -171,9 +162,13 @@ export default function TestimonialsPage() {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-8 w-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{getTranslation(currentLang, "productivityIncrease")}</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  {getTranslation(currentLang, "testimonials.productivityIncrease")}
+                </h3>
                 <div className="text-3xl font-bold text-green-600 mb-2">+65%</div>
-                <p className="text-gray-600 text-sm">{getTranslation(currentLang, "averageProductivityIncrease")}</p>
+                <p className="text-gray-600 text-sm">
+                  {getTranslation(currentLang, "testimonials.averageProductivityIncrease")}
+                </p>
               </div>
             </Card>
 
@@ -182,9 +177,13 @@ export default function TestimonialsPage() {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{getTranslation(currentLang, "customerSatisfaction")}</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  {getTranslation(currentLang, "testimonials.customerSatisfaction")}
+                </h3>
                 <div className="text-3xl font-bold text-blue-600 mb-2">+40%</div>
-                <p className="text-gray-600 text-sm">{getTranslation(currentLang, "higherCustomerSatisfaction")}</p>
+                <p className="text-gray-600 text-sm">
+                  {getTranslation(currentLang, "testimonials.higherCustomerSatisfaction")}
+                </p>
               </div>
             </Card>
 
@@ -193,9 +192,13 @@ export default function TestimonialsPage() {
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Award className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{getTranslation(currentLang, "errorReduction")}</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  {getTranslation(currentLang, "testimonials.errorReduction")}
+                </h3>
                 <div className="text-3xl font-bold text-purple-600 mb-2">-80%</div>
-                <p className="text-gray-600 text-sm">{getTranslation(currentLang, "fewerProcessingErrors")}</p>
+                <p className="text-gray-600 text-sm">
+                  {getTranslation(currentLang, "testimonials.fewerProcessingErrors")}
+                </p>
               </div>
             </Card>
           </div>
@@ -207,27 +210,26 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "joinSuccessfulBusinesses")}
+              {getTranslation(currentLang, "testimonials.joinSuccessfulBusinesses")}
             </h2>
-            <p className="text-xl text-gray-600 mb-8">{getTranslation(currentLang, "startYourSuccessStory")}</p>
+            <p className="text-xl text-gray-600 mb-8">
+              {getTranslation(currentLang, "testimonials.startYourSuccessStory")}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
-                {getTranslation(currentLang, "startFreeTrial")}
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-transparent">
-                {getTranslation(currentLang, "requestDemo")}
+                {getTranslation(currentLang, "hero.startFreeTrial")}
               </Button>
             </div>
             <p className="text-sm text-gray-500 mt-4">
-              {getTranslation(currentLang, "noCreditCard")} • {getTranslation(currentLang, "cancelAnytime")} •{" "}
-              {getTranslation(currentLang, "support24_7")}
+              {getTranslation(currentLang, "common.noCreditCard")} • {getTranslation(currentLang, "common.cancelAnytime")} •{" "}
+              {getTranslation(currentLang, "common.support24_7")}
             </p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <Footer /> 
+      <Footer />
     </div>
   )
 }

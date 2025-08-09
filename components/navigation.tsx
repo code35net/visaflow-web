@@ -26,12 +26,12 @@ export function Navigation() {
   }, [])
 
   const navItems = [
-    { href: "/", label: getTranslation(currentLang, "home") },
-    { href: "/features", label: getTranslation(currentLang, "features") },
-    { href: "/roadmap", label: getTranslation(currentLang, "roadmap") },
-    { href: "/pricing", label: getTranslation(currentLang, "pricing") },
-    { href: "/testimonials", label: getTranslation(currentLang, "testimonials") },
-    { href: "/contact", label: getTranslation(currentLang, "contact") },
+    { href: "/", label: getTranslation(currentLang, "navigation.home") },
+    { href: "/features", label: getTranslation(currentLang, "navigation.features") },
+    { href: "/roadmap", label: getTranslation(currentLang, "navigation.roadmap") },
+    { href: "/pricing", label: getTranslation(currentLang, "navigation.pricing") },
+    { href: "/testimonials", label: getTranslation(currentLang, "navigation.testimonials") },
+    { href: "/contact", label: getTranslation(currentLang, "navigation.contact") },
   ]
 
   return (
@@ -66,11 +66,11 @@ export function Navigation() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* <LanguageSelector /> */}
+           <LanguageSelector /> 
             <Link
                 key="https://app.visaflow.tr/"
                 href="https://app.visaflow.tr/" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "login")}</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "navigation.login")}</Button>
             </Link>
             {/* <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "freeTrial")}</Button> */}
           </div>
@@ -104,7 +104,7 @@ export function Navigation() {
               ))}
               <div className="px-4 pt-4 border-t space-y-2">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  {getTranslation(currentLang, "login")}
+                  {getTranslation(currentLang, "navigation.login")}
                 </Button>
 
               </div>

@@ -9,15 +9,12 @@ import { Badge } from "@/components/ui/badge"
 import {
   Calendar,
   CheckCircle,
+  Code,
   Clock,
   Zap,
   Smartphone,
   Bot,
   BarChart3,
-  Plug,
-  Languages,
-  Shield,
-  Expand,
 } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -41,10 +38,12 @@ export default function RoadmapPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="text-blue-600">{getTranslation(currentLang, "roadmap2024")}</span>
+              <span className="text-blue-600">
+                {getTranslation(currentLang, "roadmap.title")}
+              </span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              {getTranslation(currentLang, "roadmapHeroSubtitle")}
+              {getTranslation(currentLang, "roadmap.heroSubtitle")}
             </p>
           </div>
         </div>
@@ -54,73 +53,6 @@ export default function RoadmapPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto space-y-20">
 
-            {/* Completed */}
-            <div>
-              <div className="flex items-center mb-8">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mr-6">
-                  <CheckCircle className="h-6 w-6 text-green-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">{getTranslation(currentLang, "completed")}</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center space-x-3">
-                      <Smartphone className="h-8 w-8 text-blue-600" />
-                      <div>
-                        <CardTitle>{getTranslation(currentLang, "customerPortal")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "customerPortalDescription")}</CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "applicationStatusTracking")}
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "documentUploadSystem")}
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "appointmentScheduling")}
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center space-x-3">
-                      <Smartphone className="h-8 w-8 text-blue-600" />
-                      <div>
-                        <CardTitle>{getTranslation(currentLang, "mobileApp")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "mobileAppDescription")}</CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "offlineSupport")}
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "pushNotifications")}
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "cameraIntegration")}
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-
             {/* In Development */}
             <div>
               <div className="flex items-center mb-8">
@@ -128,34 +60,36 @@ export default function RoadmapPage() {
                   <Zap className="h-6 w-6 text-blue-600" />
                 </div>
                 <div className="flex items-center space-x-4">
-                  <h2 className="text-2xl font-bold text-gray-900">{getTranslation(currentLang, "inDevelopment")}</h2>
-                  <Badge className="bg-blue-100 text-blue-800">Temmuz – Eylül 2024</Badge>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    {getTranslation(currentLang, "roadmap.inDevelopment")}
+                  </h2>
+                  <Badge className="bg-blue-100 text-blue-800">Temmuz – Ekim 2025</Badge>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-center space-x-3">
-                      <Bot className="h-8 w-8 text-blue-600" />
+                      <Smartphone className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "aiAssistant")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "aiAssistantDescription")}</CardDescription>
+                        <CardTitle>{getTranslation(currentLang, "roadmap.customerPortal")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "roadmap.customerPortalDescription")}</CardDescription>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "automaticFormFilling")}
+                        <Code className="h-4 w-4 text-blue-600 mr-2" />
+                        {getTranslation(currentLang, "roadmap.applicationStatusTracking")}
                       </li>
                       <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "smartSuggestionSystem")}
+                        <Code className="h-4 w-4 text-blue-600 mr-2" />
+                        {getTranslation(currentLang, "roadmap.documentUploadSystem")}
                       </li>
                       <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "chatbotSupport")}
+                        <Code className="h-4 w-4 text-blue-600 mr-2" />
+                        {getTranslation(currentLang, "roadmap.customerListing")}
                       </li>
                     </ul>
                   </CardContent>
@@ -166,24 +100,24 @@ export default function RoadmapPage() {
                     <div className="flex items-center space-x-3">
                       <BarChart3 className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "advancedAnalytics")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "advancedAnalyticsDescription")}</CardDescription>
+                        <CardTitle>{getTranslation(currentLang, "roadmap.advancedAnalytics")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "roadmap.advancedAnalyticsDescription")}</CardDescription>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "realTimeDashboard")}
+                        <Code className="h-4 w-4 text-blue-600 mr-2" />
+                        {getTranslation(currentLang, "roadmap.realTimeDashboard")}
                       </li>
                       <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "customizableReports")}
+                        <Code className="h-4 w-4 text-blue-600 mr-2" />
+                        {getTranslation(currentLang, "roadmap.customizableReports")}
                       </li>
                       <li className="flex items-center">
-                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "predictiveAnalysis")}
+                        <Code className="h-4 w-4 text-blue-600 mr-2" />
+                        {getTranslation(currentLang, "roadmap.predictiveAnalysis")}
                       </li>
                     </ul>
                   </CardContent>
@@ -197,10 +131,135 @@ export default function RoadmapPage() {
                 <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full mr-6">
                   <Calendar className="h-6 w-6 text-gray-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">{getTranslation(currentLang, "planned")}</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {getTranslation(currentLang, "roadmap.planned")}
+                </h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* ...planned cards here (API, multi-language, blockchain, expansion)... */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Bot className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "roadmap.aiAssistant")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "roadmap.aiAssistantDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.automaticFormFilling")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.smartSuggestionSystem")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.chatbotSupport")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Smartphone className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "roadmap.mobileApp")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "roadmap.mobileAppDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.offlineSupport")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.pushNotifications")}
+                      </li>
+                      <li className="flex items-center">
+                        <Clock className="h-4 w-4 text-orange-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.cameraIntegration")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Completed */}
+            <div>
+              <div className="flex items-center mb-8">
+                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mr-6">
+                  <CheckCircle className="h-6 w-6 text-green-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {getTranslation(currentLang, "roadmap.completed")}
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <Smartphone className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "roadmap.customerPortal")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "roadmap.customerPortalDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.applicationStatusTracking")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.documentUploadSystem")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.customerListing")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-3">
+                      <BarChart3 className="h-8 w-8 text-blue-600" />
+                      <div>
+                        <CardTitle>{getTranslation(currentLang, "roadmap.normalAnalytics")}</CardTitle>
+                        <CardDescription>{getTranslation(currentLang, "roadmap.normalAnalyticsDescription")}</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.normalDashboard")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.normalReports")}
+                      </li>
+                      <li className="flex items-center">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                        {getTranslation(currentLang, "roadmap.normalAnalysis")}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
@@ -212,15 +271,14 @@ export default function RoadmapPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "experienceTheFuture")}
+              {getTranslation(currentLang, "roadmap.experienceTheFuture")}
             </h2>
-            <p className="text-xl text-gray-600 mb-8">{getTranslation(currentLang, "digitalizeVisaOperations")}</p>
+            <p className="text-xl text-gray-600 mb-8">
+              {getTranslation(currentLang, "roadmap.digitalizeVisaOperations")}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
-                {getTranslation(currentLang, "freeTrial")}
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-transparent">
-                {getTranslation(currentLang, "requestDemo")}
+                {getTranslation(currentLang, "hero.startFreeTrial")}
               </Button>
             </div>
           </div>

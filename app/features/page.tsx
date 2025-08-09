@@ -47,12 +47,11 @@ export default function FeaturesPage() {
       <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "powerfulFeatures")}
+              {getTranslation(currentLang, "featuresPage.title")}
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              {getTranslation(currentLang, "featuresHeroSubtitle")}
+              {getTranslation(currentLang, "featuresPage.heroSubtitle")}
             </p>
           </div>
         </div>
@@ -69,33 +68,43 @@ export default function FeaturesPage() {
                   <Users className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {getTranslation(currentLang, "customerManagement")}
+                  {getTranslation(currentLang, "featuresPage.customerManagement")}
                 </h3>
-                <p className="text-gray-600">{getTranslation(currentLang, "customerManagementDesc")}</p>
+                <p className="text-gray-600">
+                  {getTranslation(currentLang, "featuresPage.customerManagementDesc")}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-gray-900">
-                      {getTranslation(currentLang, "detailedCustomerProfiles")}
+                      {getTranslation(currentLang, "featuresPage.detailedCustomerProfiles")}
                     </h4>
-                    <p className="text-sm text-gray-600">{getTranslation(currentLang, "personalInfoContactHistory")}</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "contactHistory")}</h4>
-                    <p className="text-sm text-gray-600">{getTranslation(currentLang, "allInteractionsInOnePlace")}</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "segmentation")}</h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "categorizeCustomersForTargetedCampaigns")}
+                      {getTranslation(currentLang, "featuresPage.personalInfoContactHistory")}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.contactHistory")}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.allInteractionsInOnePlace")}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.segmentation")}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.categorizeCustomersForTargetedCampaigns")}
                     </p>
                   </div>
                 </div>
@@ -109,35 +118,43 @@ export default function FeaturesPage() {
                   <FileText className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {getTranslation(currentLang, "applicationTracking")}
+                  {getTranslation(currentLang, "featuresPage.applicationTracking")}
                 </h3>
-                <p className="text-gray-600">{getTranslation(currentLang, "applicationTrackingDesc")}</p>
+                <p className="text-gray-600">
+                  {getTranslation(currentLang, "featuresPage.applicationTrackingDesc")}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "statusTracking")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.statusTracking")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "instantViewOfApplicationStatus")}
+                      {getTranslation(currentLang, "featuresPage.instantViewOfApplicationStatus")}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "documentManagement")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.documentManagement")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "securelyStoreAndOrganizeDocuments")}
+                      {getTranslation(currentLang, "featuresPage.securelyStoreAndOrganizeDocuments")}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "automaticUpdates")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.automaticUpdates")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "automaticNotificationsForStatusChanges")}
+                      {getTranslation(currentLang, "featuresPage.automaticNotificationsForStatusChanges")}
                     </p>
                   </div>
                 </div>
@@ -151,33 +168,43 @@ export default function FeaturesPage() {
                   <Calendar className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {getTranslation(currentLang, "appointmentSystem")}
+                  {getTranslation(currentLang, "featuresPage.appointmentSystem")}
                 </h3>
-                <p className="text-gray-600">{getTranslation(currentLang, "appointmentSystemDesc")}</p>
+                <p className="text-gray-600">
+                  {getTranslation(currentLang, "featuresPage.appointmentSystemDesc")}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "onlineBooking")}</h4>
-                    <p className="text-sm text-gray-600">{getTranslation(currentLang, "customersCanBook247")}</p>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.onlineBooking")}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.customersCanBook247")}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-gray-900">
-                      {getTranslation(currentLang, "calendarIntegration")}
+                      {getTranslation(currentLang, "featuresPage.calendarIntegration")}
                     </h4>
-                    <p className="text-sm text-gray-600">{getTranslation(currentLang, "syncWithGoogleOutlook")}</p>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.syncWithGoogleOutlook")}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "reminderSystem")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.reminderSystem")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "automaticRemindersViaSmsEmail")}
+                      {getTranslation(currentLang, "featuresPage.automaticRemindersViaSmsEmail")}
                     </p>
                   </div>
                 </div>
@@ -191,34 +218,44 @@ export default function FeaturesPage() {
                   <Shield className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {getTranslation(currentLang, "secureDocumentStorage")}
+                  {getTranslation(currentLang, "featuresPage.secureDocumentStorage")}
                 </h3>
-                <p className="text-gray-600">{getTranslation(currentLang, "securelyStoreCustomerDocuments")}</p>
+                <p className="text-gray-600">
+                  {getTranslation(currentLang, "featuresPage.securelyStoreCustomerDocuments")}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "sslEncryption")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.sslEncryption")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "allDataProtectedWith256BitSsl")}
+                      {getTranslation(currentLang, "featuresPage.allDataProtectedWith256BitSsl")}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "automaticBackup")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.automaticBackup")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "dailyAutomaticBackupAndDataRecovery")}
+                      {getTranslation(currentLang, "featuresPage.dailyAutomaticBackupAndDataRecovery")}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "accessControl")}</h4>
-                    <p className="text-sm text-gray-600">{getTranslation(currentLang, "roleBasedAccessPermissions")}</p>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.accessControl")}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.roleBasedAccessPermissions")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -231,26 +268,21 @@ export default function FeaturesPage() {
                   <BarChart3 className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {getTranslation(currentLang, "reportingAnalytics")}
+                  {getTranslation(currentLang, "featuresPage.reportingAnalytics")}
                 </h3>
-                <p className="text-gray-600">{getTranslation(currentLang, "detailedReportsAndBusinessIntelligence")}</p>
+                <p className="text-gray-600">
+                  {getTranslation(currentLang, "featuresPage.detailedReportsAndBusinessIntelligence")}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "performanceReports")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.performanceReports")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "applicationSuccessRatesAndDurationAnalysis")}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "revenueAnalysis")}</h4>
-                    <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "monthlyAnnualRevenueReportsAndForecasts")}
+                      {getTranslation(currentLang, "featuresPage.applicationSuccessRatesAndDurationAnalysis")}
                     </p>
                   </div>
                 </div>
@@ -258,10 +290,21 @@ export default function FeaturesPage() {
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-gray-900">
-                      {getTranslation(currentLang, "customizableDashboard")}
+                      {getTranslation(currentLang, "featuresPage.revenueAnalysis")}
                     </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "customizableDashboardAccordingToYourNeeds")}
+                      {getTranslation(currentLang, "featuresPage.monthlyAnnualRevenueReportsAndForecasts")}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.customizableDashboard")}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.customizableDashboardAccordingToYourNeeds")}
                     </p>
                   </div>
                 </div>
@@ -275,34 +318,44 @@ export default function FeaturesPage() {
                   <Settings className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                  {getTranslation(currentLang, "multiUserSystem")}
+                  {getTranslation(currentLang, "featuresPage.multiUserSystem")}
                 </h3>
-                <p className="text-gray-600">{getTranslation(currentLang, "workWithYourTeam")}</p>
+                <p className="text-gray-600">
+                  {getTranslation(currentLang, "featuresPage.workWithYourTeam")}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "roleBasedAccess")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.roleBasedAccess")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "adminOperatorCustomerRepresentativeRoles")}
+                      {getTranslation(currentLang, "featuresPage.adminOperatorCustomerRepresentativeRoles")}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "teamManagement")}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "featuresPage.teamManagement")}
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      {getTranslation(currentLang, "addUserRemoveAndEditPermissions")}
+                      {getTranslation(currentLang, "featuresPage.addUserRemoveAndEditPermissions")}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{getTranslation(currentLang, "activityTracking")}</h4>
-                    <p className="text-sm text-gray-600">{getTranslation(currentLang, "whoDidWhatWhenFullAudit")}</p>
+                    <h4 className="font-semibold text-gray-900">
+                      {getTranslation(currentLang, "pricing.activityTracking")}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {getTranslation(currentLang, "featuresPage.whoDidWhatWhenFullAudit")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -316,36 +369,52 @@ export default function FeaturesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "moreFeatures")}
+              {getTranslation(currentLang, "featuresPage.moreFeatures")}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {getTranslation(currentLang, "additionalFeaturesToSimplifyYourBusinessWithVisaFlowCrm")}
+              {getTranslation(currentLang, "featuresPage.additionalFeaturesToSimplifyYourBusinessWithVisaFlowCrm")}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <Smartphone className="h-10 w-10 text-blue-600 mx-auto mb-4" />
-              <h3 className="font-semibold mb-2">{getTranslation(currentLang, "mobileFriendly")}</h3>
-              <p className="text-sm text-gray-600">{getTranslation(currentLang, "accessFromAnyDevice")}</p>
+              <h3 className="font-semibold mb-2">
+                {getTranslation(currentLang, "featuresPage.mobileFriendly")}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {getTranslation(currentLang, "featuresPage.accessFromAnyDevice")}
+              </p>
             </Card>
 
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <Bell className="h-10 w-10 text-blue-600 mx-auto mb-4" />
-              <h3 className="font-semibold mb-2">{getTranslation(currentLang, "smartNotifications")}</h3>
-              <p className="text-sm text-gray-600">{getTranslation(currentLang, "alertsForImportantEvents")}</p>
+              <h3 className="font-semibold mb-2">
+                {getTranslation(currentLang, "featuresPage.smartNotifications")}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {getTranslation(currentLang, "featuresPage.alertsForImportantEvents")}
+              </p>
             </Card>
 
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <Lock className="h-10 w-10 text-blue-600 mx-auto mb-4" />
-              <h3 className="font-semibold mb-2">{getTranslation(currentLang, "gdprCompliant")}</h3>
-              <p className="text-sm text-gray-600">{getTranslation(currentLang, "dataProtectionStandards")}</p>
+              <h3 className="font-semibold mb-2">
+                {getTranslation(currentLang, "featuresPage.gdprCompliant")}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {getTranslation(currentLang, "featuresPage.dataProtectionStandards")}
+              </p>
             </Card>
 
             <Card className="p-6 text-center hover:shadow-lg transition-shadow">
               <Zap className="h-10 w-10 text-blue-600 mx-auto mb-4" />
-              <h3 className="font-semibold mb-2">{getTranslation(currentLang, "fastPerformance")}</h3>
-              <p className="text-sm text-gray-600">{getTranslation(currentLang, "loadingInSeconds")}</p>
+              <h3 className="font-semibold mb-2">
+                {getTranslation(currentLang, "featuresPage.fastPerformance")}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {getTranslation(currentLang, "featuresPage.loadingInSeconds")}
+              </p>
             </Card>
           </div>
         </div>
@@ -356,22 +425,20 @@ export default function FeaturesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "tryAllFeaturesFree")}
+              {getTranslation(currentLang, "featuresPage.tryAllFeaturesFree")}
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              {getTranslation(currentLang, "discoverAllFeaturesWith14DayFreeTrial")}
+              {getTranslation(currentLang, "featuresPage.discoverAllFeaturesWith14DayFreeTrial")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
-                {getTranslation(currentLang, "startFreeTrial")}
+                {getTranslation(currentLang, "hero.startFreeTrial")}
               </Button>
-              
             </div>
           </div>
         </div>
       </section>
 
-      
       <Footer />
     </div>
   )

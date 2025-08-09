@@ -13,25 +13,20 @@ import { Separator } from "@/components/ui/separator"
 import { CreditCard, Shield, ArrowLeft, CheckCircle, Plus, Minus } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams, useRouter } from "next/navigation"
-import { getTranslation, type Language } from "@/lib/translations"
+import { getTranslation, type Language, type TranslationKey } from "@/lib/translations"
 
 function CheckoutContent() {
   const [formData, setFormData] = useState({
-    // Personal Information
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     company: "",
-
-    // Billing Address
     address: "",
     city: "",
     state: "",
     zipCode: "",
     country: "TR",
-
-    // Payment Information
     cardNumber: "",
     expiryDate: "",
     cvv: "",
@@ -42,69 +37,91 @@ function CheckoutContent() {
   const [isProcessing, setIsProcessing] = useState(false)
   const searchParams = useSearchParams()
   const router = useRouter()
-  const plan = searchParams.get("plan") || "monthly"
+  const plan = (searchParams.get("plan") as "monthly" | "yearly" | "additional") || "monthly"
   const [currentLang, setCurrentLang] = useState<Language>("tr")
 
   useEffect(() => {
     const savedLang = localStorage.getItem("language") as Language
     if (savedLang) setCurrentLang(savedLang)
-
-    const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
-
+    const handleLanguageChange = (event: CustomEvent) => setCurrentLang(event.detail as Language)
     window.addEventListener("languageChange", handleLanguageChange as EventListener)
     return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
   }, [])
 
-  const planDetails = {
-    monthly: {
-      name: "Aylık Plan",
-      basePrice: 72.45,
-      price: "€ 72.45",
-      period: "/ ay",
-      description: "Küçük ofisler için ideal",
-      features: ["Sınırsız müşteri", "Tüm temel özellikler", "Email desteği", "5 GB depolama"],
-    },
-    yearly: {
-      name: "Yıllık Plan",
-      basePrice: 695.52,
-      price: "€ 695.52",
-      period: "/ yıl",
-      originalPrice: "€ 869.40",
-      originalBasePrice: 828,
-      discount: "%20 İndirim",
-      description: "En popüler seçim",
-      features: ["Sınırsız müşteri", "Tüm premium özellikler", "Öncelikli destek", "50 GB depolama", "Ücretsiz eğitim"],
-    },
-    additional: {
-      name: "Ek Kullanıcı",
-      basePrice: 2,
-      price: "€ 2",
-      period: "/ kullanıcı / ay",
-      description: "Ekibinizi büyütün",
-      features: ["Tam sistem erişimi", "Rol tabanlı yetkilendirme", "Kişisel dashboard", "Aktivite takibi"],
-    },
-  }
+  // Yardımcı çeviri fonksiyonu: sadece TranslationKey kabul eder
+  const t = (key: TranslationKey) => getTranslation(currentLang, key)
 
-  const currentPlan = planDetails[plan as keyof typeof planDetails]
+  type PlanConfig = {
+  nameKey: TranslationKey
+  basePrice: number
+  price: string
+  periodKey: TranslationKey
+  descriptionKey: TranslationKey
+  featureKeys: readonly TranslationKey[]
+  originalPrice?: string
+  originalBasePrice?: number
+  discountKey?: TranslationKey
+}
 
-  // Calculate totals
+const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
+  monthly: {
+    nameKey: "pricing.monthlyPlan",
+    basePrice: 72.45,
+    price: "€ 72.45",
+    periodKey: "pricing.month",
+    descriptionKey: "pricing.smallOfficesIdeal",
+    featureKeys: [
+      "pricing.unlimitedCustomers",
+      "pricing.allBasicFeatures",
+      "pricing.emailSupport",
+      "pricing.storage5GB",
+      "pricing.basicReporting",
+    ],
+  },
+  yearly: {
+    nameKey: "pricing.yearlyPlan",
+    basePrice: 695.52,
+    price: "€ 695.52",
+    periodKey: "pricing.year",
+    originalPrice: "€ 869.40",
+    originalBasePrice: 828,
+    discountKey: "pricing.discount20",
+    descriptionKey: "pricing.growingOfficesBest",
+    featureKeys: [
+      "pricing.allPremiumFeatures",
+      "pricing.storage50GB",
+      "pricing.advancedReporting",
+      "pricing.freeTrainingSetup",
+      "contact.phoneSupport",
+    ],
+  },
+  additional: {
+    nameKey: "pricing.additionalUser",
+    basePrice: 2,
+    price: "€ 2",
+    periodKey: "pricing.month",
+    descriptionKey: "pricing.expandYourTeam",
+    featureKeys: [
+      "pricing.fullSystemAccess",
+      "pricing.roleBasedAuth",
+      "pricing.personalDashboard",
+      "pricing.activityTracking",
+    ],
+  },
+}
+ 
+
+  const currentPlan = planDetails[plan]
+
+  // Tutar hesapları
   const calculateTotals = () => {
-    let subtotal = 0
-    let vat = 0
-    let total = 0
+    let subtotal =
+      plan === "additional"
+        ? currentPlan.basePrice * Math.max(1, additionalUsers)
+        : currentPlan.basePrice + additionalUsers * 2
 
-    if (plan === "additional") {
-      // Sadece ek kullanıcı planı
-      subtotal = currentPlan.basePrice * Math.max(1, additionalUsers)
-    } else {
-      // Ana plan + ek kullanıcılar
-      subtotal = currentPlan.basePrice + (currentPlan.basePrice === 2 ? 0 : additionalUsers * 2)
-    }
-
-    vat = subtotal * 0.2
-    total = subtotal + vat
+    const vat = subtotal * 0.2
+    const total = subtotal + vat
 
     return {
       subtotal: subtotal.toFixed(2),
@@ -121,33 +138,22 @@ function CheckoutContent() {
   }
 
   const handleUserCountChange = (increment: boolean) => {
-    if (increment) {
-      setAdditionalUsers((prev) => prev + 1)
-    } else {
-      if (plan === "additional") {
-        setAdditionalUsers((prev) => Math.max(1, prev - 1))
-      } else {
-        setAdditionalUsers((prev) => Math.max(0, prev - 1))
-      }
-    }
+    if (increment) setAdditionalUsers((p) => p + 1)
+    else setAdditionalUsers((p) => (plan === "additional" ? Math.max(1, p - 1) : Math.max(0, p - 1)))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsProcessing(true)
-
-    // Simulate payment processing
     setTimeout(() => {
-      // Simulate random success/failure for demo
-      const isSuccess = Math.random() > 0.2 // 80% success rate
-
-      if (isSuccess) {
-        router.push(`/payment-success?plan=${plan}&users=${additionalUsers}&total=${totals.total}`)
-      } else {
-        router.push(`/payment-failed?plan=${plan}&users=${additionalUsers}&total=${totals.total}`)
-      }
+      const isSuccess = Math.random() > 0.2
+      if (isSuccess) router.push(`/payment-success?plan=${plan}&users=${additionalUsers}&total=${totals.total}`)
+      else router.push(`/payment-failed?plan=${plan}&users=${additionalUsers}&total=${totals.total}`)
     }, 3000)
   }
+
+  // Dönem metni: tüm planlar için aynı format
+  const periodText = `/ ${t(currentPlan.periodKey).toLowerCase()}`
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -159,12 +165,10 @@ function CheckoutContent() {
           <div className="max-w-4xl mx-auto">
             <Link href="/pricing" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              {getTranslation(currentLang, "backToPricing")}
+              {t("checkout.backToPricing")}
             </Link>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "checkout")}
-            </h1>
-            <p className="text-xl text-gray-600">{getTranslation(currentLang, "securePayment")}</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t("checkout.title")}</h1>
+            <p className="text-xl text-gray-600">{t("checkout.securePayment")}</p>
           </div>
         </div>
       </section>
@@ -180,35 +184,36 @@ function CheckoutContent() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <Shield className="h-5 w-5 text-green-500 mr-2" />
-                      {getTranslation(currentLang, "orderSummary")}
+                      {t("checkout.orderSummary")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-semibold">{currentPlan.name}</h3>
-                        
+                        <h3 className="font-semibold">{t(currentPlan.nameKey)}</h3>
+                        <p className="text-gray-600 text-sm">{t(currentPlan.descriptionKey)}</p>
                       </div>
                       <div className="text-right">
-                        {"originalBasePrice" in currentPlan && (
+                        {"originalBasePrice" in currentPlan && currentPlan.originalPrice && (
                           <div className="text-sm text-gray-400 line-through">{currentPlan.originalPrice}</div>
                         )}
-                        <div className="font-bold text-lg">{currentPlan.price} {currentPlan.period}</div>
-                        
+                        <div className="font-bold text-lg">
+                          {currentPlan.price} <small>{periodText}</small>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Additional Users Section - Tüm planlar için */}
+                    {/* Additional Users */}
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <div className="flex items-center justify-between mb-3">
-                        <Label className="font-semibold">{getTranslation(currentLang, "additionalUsersCount")}</Label>
+                        <Label className="font-semibold">{t("checkout.additionalUsersCount")}</Label>
                         <div className="flex items-center space-x-3">
                           <Button
                             type="button"
                             variant="outline"
                             size="sm"
                             onClick={() => handleUserCountChange(false)}
-                            disabled={additionalUsers <= 0}
+                            disabled={plan !== "additional" ? additionalUsers <= 0 : additionalUsers <= 1}
                             className="h-8 w-8 p-0"
                           >
                             <Minus className="h-4 w-4" />
@@ -227,23 +232,25 @@ function CheckoutContent() {
                       </div>
                       <p className="text-sm text-blue-700">
                         {additionalUsers > 0
-                          ? `${additionalUsers} ${getTranslation(currentLang, "additionalUsers")} × €2 = €${(additionalUsers * 2).toFixed(2)}`
-                          : getTranslation(currentLang, "noAdditionalUsers")}
+                          ? `${additionalUsers} ${t("checkout.additionalUsers")} × €2 = €${(additionalUsers * 2).toFixed(2)}`
+                          : t("checkout.noAdditionalUsers")}
                       </p>
                     </div>
 
-                    {"discount" in currentPlan && (
-                      <Badge className="bg-green-100 text-green-800 hover:bg-green-100">{currentPlan.discount}</Badge>
+                    {currentPlan.discountKey && (
+                      <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+                        {t(currentPlan.discountKey)}
+                      </Badge>
                     )}
 
                     <Separator />
 
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">{getTranslation(currentLang, "includedFeatures")}:</h4>
-                      {currentPlan.features.map((feature, index) => (
-                        <div key={index} className="flex items-center text-sm">
+                      <h4 className="font-semibold text-sm">{t("checkout.includedFeatures")}:</h4>
+                      {currentPlan.featureKeys.map((fk) => (
+                        <div key={fk} className="flex items-center text-sm">
                           <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                          {feature}
+                          {t(fk)}
                         </div>
                       ))}
                     </div>
@@ -252,15 +259,15 @@ function CheckoutContent() {
 
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span>{getTranslation(currentLang, "subtotal")}:</span>
+                        <span>{t("checkout.subtotal")}:</span>
                         <span>€{totals.subtotal}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>{getTranslation(currentLang, "vat")} (%20):</span>
+                        <span>{t("checkout.vat")} (%20):</span>
                         <span>€{totals.vat}</span>
                       </div>
                       <div className="flex justify-between font-bold text-lg border-t pt-2">
-                        <span>{getTranslation(currentLang, "total")}:</span>
+                        <span>{t("checkout.total")}:</span>
                         <span>€{totals.total}</span>
                       </div>
                     </div>
@@ -268,7 +275,7 @@ function CheckoutContent() {
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <div className="flex items-center text-sm text-blue-800">
                         <Shield className="h-4 w-4 mr-2" />
-                        {getTranslation(currentLang, "freeTrial")}
+                        {t("pricing.freeTrial14Days")}
                       </div>
                     </div>
                   </CardContent>
@@ -281,31 +288,31 @@ function CheckoutContent() {
                   {/* Personal Information */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>{getTranslation(currentLang, "personalInformation")}</CardTitle>
-                      <CardDescription>{getTranslation(currentLang, "personalInformationDescription")}</CardDescription>
+                      <CardTitle>{t("checkout.personalInformation")}</CardTitle>
+                      <CardDescription>{t("checkout.personalInformationDescription")}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="firstName">{getTranslation(currentLang, "firstName")} *</Label>
+                          <Label htmlFor="firstName">{t("contact.firstName")} *</Label>
                           <Input
                             id="firstName"
                             name="firstName"
                             value={formData.firstName}
                             onChange={handleInputChange}
                             required
-                            placeholder={getTranslation(currentLang, "firstNamePlaceholder")}
+                            placeholder={t("contact.firstNamePlaceholder")}
                           />
                         </div>
                         <div>
-                          <Label htmlFor="lastName">{getTranslation(currentLang, "lastName")} *</Label>
+                          <Label htmlFor="lastName">{t("contact.lastName")} *</Label>
                           <Input
                             id="lastName"
                             name="lastName"
                             value={formData.lastName}
                             onChange={handleInputChange}
                             required
-                            placeholder={getTranslation(currentLang, "lastNamePlaceholder")}
+                            placeholder={t("contact.lastNamePlaceholder")}
                           />
                         </div>
                       </div>
@@ -325,7 +332,7 @@ function CheckoutContent() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="phone">{getTranslation(currentLang, "phone")}</Label>
+                          <Label htmlFor="phone">{t("contact.phone")}</Label>
                           <Input
                             id="phone"
                             name="phone"
@@ -335,13 +342,13 @@ function CheckoutContent() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="company">{getTranslation(currentLang, "company")}</Label>
+                          <Label htmlFor="company">{t("navigation.company")}</Label>
                           <Input
                             id="company"
                             name="company"
                             value={formData.company}
                             onChange={handleInputChange}
-                            placeholder={getTranslation(currentLang, "companyPlaceholder")}
+                            placeholder={t("checkout.companyPlaceholder")}
                           />
                         </div>
                       </div>
@@ -351,46 +358,46 @@ function CheckoutContent() {
                   {/* Billing Address */}
                   <Card>
                     <CardHeader>
-                      <CardTitle>{getTranslation(currentLang, "billingAddress")}</CardTitle>
-                      <CardDescription>{getTranslation(currentLang, "billingAddressDescription")}</CardDescription>
+                      <CardTitle>{t("checkout.billingAddress")}</CardTitle>
+                      <CardDescription>{t("checkout.billingAddressDescription")}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="address">{getTranslation(currentLang, "address")} *</Label>
+                        <Label htmlFor="address">{t("contact.address")} *</Label>
                         <Input
                           id="address"
                           name="address"
                           value={formData.address}
                           onChange={handleInputChange}
                           required
-                          placeholder={getTranslation(currentLang, "addressPlaceholder")}
+                          placeholder={t("checkout.addressPlaceholder")}
                         />
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                          <Label htmlFor="city">{getTranslation(currentLang, "city")} *</Label>
+                          <Label htmlFor="city">{t("checkout.city")} *</Label>
                           <Input
                             id="city"
                             name="city"
                             value={formData.city}
                             onChange={handleInputChange}
                             required
-                            placeholder={getTranslation(currentLang, "cityPlaceholder")}
+                            placeholder={t("checkout.cityPlaceholder")}
                           />
                         </div>
                         <div>
-                          <Label htmlFor="state">{getTranslation(currentLang, "state")}</Label>
+                          <Label htmlFor="state">{t("checkout.state")}</Label>
                           <Input
                             id="state"
                             name="state"
                             value={formData.state}
                             onChange={handleInputChange}
-                            placeholder={getTranslation(currentLang, "statePlaceholder")}
+                            placeholder={t("checkout.statePlaceholder")}
                           />
                         </div>
                         <div>
-                          <Label htmlFor="zipCode">{getTranslation(currentLang, "zipCode")}</Label>
+                          <Label htmlFor="zipCode">{t("checkout.zipCode")}</Label>
                           <Input
                             id="zipCode"
                             name="zipCode"
@@ -402,7 +409,7 @@ function CheckoutContent() {
                       </div>
 
                       <div>
-                        <Label htmlFor="country">{getTranslation(currentLang, "country")} *</Label>
+                        <Label htmlFor="country">{t("checkout.country")} *</Label>
                         <select
                           id="country"
                           name="country"
@@ -429,13 +436,13 @@ function CheckoutContent() {
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         <CreditCard className="h-5 w-5 mr-2" />
-                        {getTranslation(currentLang, "paymentInformation")}
+                        {t("checkout.paymentInformation")}
                       </CardTitle>
-                      <CardDescription>{getTranslation(currentLang, "paymentInformationDescription")}</CardDescription>
+                      <CardDescription>{t("checkout.paymentInformationDescription")}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="cardName">{getTranslation(currentLang, "cardName")} *</Label>
+                        <Label htmlFor="cardName">{t("checkout.cardName")} *</Label>
                         <Input
                           id="cardName"
                           name="cardName"
@@ -447,7 +454,7 @@ function CheckoutContent() {
                       </div>
 
                       <div>
-                        <Label htmlFor="cardNumber">{getTranslation(currentLang, "cardNumber")} *</Label>
+                        <Label htmlFor="cardNumber">{t("checkout.cardNumber")} *</Label>
                         <Input
                           id="cardNumber"
                           name="cardNumber"
@@ -461,7 +468,7 @@ function CheckoutContent() {
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="expiryDate">{getTranslation(currentLang, "expiryDate")} *</Label>
+                          <Label htmlFor="expiryDate">{t("checkout.expiryDate")} *</Label>
                           <Input
                             id="expiryDate"
                             name="expiryDate"
@@ -489,7 +496,7 @@ function CheckoutContent() {
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <div className="flex items-center text-sm text-gray-600">
                           <Shield className="h-4 w-4 mr-2 text-green-500" />
-                          {getTranslation(currentLang, "paymentSecure")}
+                          {t("checkout.paymentSecure")}
                         </div>
                       </div>
                     </CardContent>
@@ -506,23 +513,23 @@ function CheckoutContent() {
                         {isProcessing ? (
                           <div className="flex items-center">
                             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                            {getTranslation(currentLang, "processingPayment")}
+                            {t("checkout.processingPayment")}
                           </div>
                         ) : (
-                          `€${totals.total} ${getTranslation(currentLang, "payAndStart")}`
+                          `€${totals.total} ${t("checkout.payAndStart")}`
                         )}
                       </Button>
 
                       <p className="text-center text-sm text-gray-500 mt-4">
-                        {getTranslation(currentLang, "termsAndPrivacy")}
+                        {t("checkout.termsAndPrivacyPrefix")}
                         <a href="#" className="text-blue-600 hover:underline">
-                          {getTranslation(currentLang, "termsOfService")}
+                          {t("checkout.termsOfService")}
                         </a>{" "}
-                        {getTranslation(currentLang, "and")}
+                        {t("checkout.and")}
                         <a href="#" className="text-blue-600 hover:underline">
-                          {getTranslation(currentLang, "privacyPolicy")}
+                          {t("checkout.privacyPolicy")}
                         </a>
-                        {getTranslation(currentLang, "accept")}
+                        {t("checkout.accept")}
                       </p>
                     </CardContent>
                   </Card>

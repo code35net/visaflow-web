@@ -8,59 +8,36 @@ import { Badge } from "@/components/ui/badge"
 import { XCircle, RefreshCw, Phone, Mail, CreditCard, AlertTriangle, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { getTranslation, type Language } from "@/lib/translations"
+import { getTranslation, type Language, type TranslationKey } from "@/lib/translations"
 
 function PaymentFailedContent() {
-  const [orderNumber] = useState(() => "VF-ERR-" + Math.random().toString(36).substr(2, 9).toUpperCase())
+  const [orderNumber] = useState(() =>
+    "VF-ERR-" + Math.random().toString(36).slice(2, 11).toUpperCase()
+  )
   const searchParams = useSearchParams()
-  const plan = searchParams.get("plan") || "monthly"
+  const plan = (searchParams.get("plan") as "monthly" | "yearly" | "additional") || "monthly"
 
   const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const t = (key: TranslationKey) => getTranslation(currentLang, key)
 
   useEffect(() => {
     const savedLang = localStorage.getItem("language") as Language
     if (savedLang) setCurrentLang(savedLang)
-
-    const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
-
+    const handleLanguageChange = (event: CustomEvent) => setCurrentLang(event.detail as Language)
     window.addEventListener("languageChange", handleLanguageChange as EventListener)
     return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
   }, [])
 
-  const planDetails = {
-    monthly: { name: "Aylık Plan", basePrice: 69, price: "€82.80", period: "/ ay" },
-    yearly: { name: "Yıllık Plan", basePrice: 662, price: "€794.40", period: "/ yıl" },
-    additional: { name: "Ek Kullanıcı", basePrice: 2, price: "€2.40", period: "/ kullanıcı / ay" },
+  // Plan adlarını çeviriden çek
+  const planNameKeyMap: Record<typeof plan, TranslationKey> = {
+    monthly: "pricing.monthlyPlan",
+    yearly: "pricing.yearlyPlan",
+    additional: "pricing.additionalUser",
   }
 
-  const currentPlan = planDetails[plan as keyof typeof planDetails]
+  const currentPlanName = t(planNameKeyMap[plan])
   const users = searchParams.get("users") || "1"
-  const totalAmount = searchParams.get("total") || currentPlan.price.replace("€", "")
-
-  const commonIssues = [
-    {
-      title: "Yetersiz Bakiye",
-      description: "Kartınızda yeterli bakiye bulunmuyor olabilir",
-      solution: "Banka hesabınızı kontrol edin veya farklı bir kart deneyin",
-    },
-    {
-      title: "Kart Bilgileri Hatalı",
-      description: "Kart numarası, son kullanma tarihi veya CVV kodu yanlış girilmiş",
-      solution: "Kart bilgilerinizi tekrar kontrol ederek yeniden deneyin",
-    },
-    {
-      title: "Banka Tarafından Engelleme",
-      description: "Bankanız güvenlik nedeniyle işlemi engelleyebilir",
-      solution: "Bankanızı arayarak online ödemelere izin verin",
-    },
-    {
-      title: "Teknik Sorun",
-      description: "Geçici bir sistem sorunu yaşanıyor olabilir",
-      solution: "Birkaç dakika bekleyip tekrar deneyebilirsiniz",
-    },
-  ]
+  const totalAmount = searchParams.get("total") || ""
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -74,11 +51,11 @@ function PaymentFailedContent() {
               <XCircle className="h-10 w-10 text-red-600" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "paymentFailed")}
+              {t("paymentFailed.title")}
             </h1>
-            <p className="text-xl text-gray-600 mb-8">{getTranslation(currentLang, "paymentError")}</p>
+            <p className="text-xl text-gray-600 mb-8">{t("paymentFailed.message")}</p>
             <Badge variant="destructive" className="text-lg px-4 py-2">
-              {getTranslation(currentLang, "errorCode")}: {orderNumber}
+              {t("paymentFailed.errorCode")}: {orderNumber}
             </Badge>
           </div>
         </div>
@@ -94,35 +71,39 @@ function PaymentFailedContent() {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <AlertTriangle className="h-5 w-5 text-orange-500 mr-2" />
-                    {getTranslation(currentLang, "failedOrder")}
+                    {t("paymentFailed.failedOrder")}
                   </CardTitle>
-                  <CardDescription>{getTranslation(currentLang, "unprocessedOrder")}</CardDescription>
+                  <CardDescription>{t("paymentFailed.unprocessedOrder")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center p-4 bg-red-50 rounded-lg border border-red-200">
                     <div>
-                      <h3 className="font-semibold text-lg">{currentPlan.name}</h3>
-                      <p className="text-gray-600">{getTranslation(currentLang, "paymentUnprocessed")}</p>
-                      {plan === "additional" && <p className="text-sm text-red-600">{users} kullanıcı</p>}
+                      <h3 className="font-semibold text-lg">{currentPlanName}</h3>
+                      <p className="text-gray-600">{t("paymentFailed.paymentUnprocessed")}</p>
+                      {plan === "additional" && (
+                        <p className="text-sm text-red-600">{users} {t("checkout.additionalUsers")}</p>
+                      )}
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-xl text-red-600">€{totalAmount}</div>
-                      <div className="text-sm text-gray-600">{getTranslation(currentLang, "vatIncluded")}</div>
+                      <div className="font-bold text-xl text-red-600">
+                        {totalAmount ? `€${totalAmount}` : "—"}
+                      </div>
+                      <div className="text-sm text-gray-600">{t("paymentSuccess.vatIncluded")}</div>
                     </div>
                   </div>
 
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span>{getTranslation(currentLang, "attemptDate")}:</span>
-                      <span>{new Date().toLocaleDateString("tr-TR")}</span>
+                      <span>{t("paymentFailed.attemptDate")}:</span>
+                      <span>{new Date().toLocaleDateString(currentLang === "tr" ? "tr-TR" : "en-US")}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{getTranslation(currentLang, "paymentMethod")}:</span>
-                      <span>{getTranslation(currentLang, "creditCard")}</span>
+                      <span>{t("paymentFailed.paymentMethod")}:</span>
+                      <span>{t("paymentSuccess.creditCard")}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{getTranslation(currentLang, "status")}:</span>
-                      <Badge variant="destructive">{getTranslation(currentLang, "failed")}</Badge>
+                      <span>{t("paymentFailed.status")}:</span>
+                      <Badge variant="destructive">{t("paymentSuccess.failed")}</Badge>
                     </div>
                   </div>
 
@@ -131,13 +112,13 @@ function PaymentFailedContent() {
                       <Link href={`/checkout?plan=${plan}`} className="flex-1">
                         <Button className="w-full bg-blue-600 hover:bg-blue-700">
                           <RefreshCw className="mr-2 h-4 w-4" />
-                          {getTranslation(currentLang, "tryAgain")}
+                          {t("paymentFailed.actions.tryAgain")}
                         </Button>
                       </Link>
                       <Link href="/pricing" className="flex-1">
                         <Button variant="outline" className="w-full bg-transparent">
                           <ArrowLeft className="mr-2 h-4 w-4" />
-                          {getTranslation(currentLang, "backToPlans")}
+                          {t("paymentFailed.actions.backToPlans")}
                         </Button>
                       </Link>
                     </div>
@@ -148,17 +129,20 @@ function PaymentFailedContent() {
               {/* Quick Actions */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{getTranslation(currentLang, "quickSolutions")}</CardTitle>
-                  <CardDescription>{getTranslation(currentLang, "thingsToTry")}</CardDescription>
+                  <CardTitle>{t("paymentFailed.quickSolutions")}</CardTitle>
+                  <CardDescription>{t("paymentFailed.quickSolutions")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
                       <CreditCard className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">{getTranslation(currentLang, "checkCardDetails")}</h4>
+                        <h4 className="font-semibold text-sm">{t("paymentFailed.issues.card.title")}</h4>
                         <p className="text-xs text-gray-600 mt-1">
-                          {getTranslation(currentLang, "checkCardDetailsDescription")}
+                          {t("paymentFailed.issues.card.desc")}
+                        </p>
+                        <p className="text-xs text-blue-700 mt-1">
+                          {t("paymentFailed.solution")}: {t("paymentFailed.issues.card.solution")}
                         </p>
                       </div>
                     </div>
@@ -166,9 +150,12 @@ function PaymentFailedContent() {
                     <div className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
                       <RefreshCw className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">{getTranslation(currentLang, "tryDifferentCard")}</h4>
+                        <h4 className="font-semibold text-sm">{t("paymentFailed.issues.balance.title")}</h4>
                         <p className="text-xs text-gray-600 mt-1">
-                          {getTranslation(currentLang, "tryDifferentCardDescription")}
+                          {t("paymentFailed.issues.balance.desc")}
+                        </p>
+                        <p className="text-xs text-blue-700 mt-1">
+                          {t("paymentFailed.solution")}: {t("paymentFailed.issues.balance.solution")}
                         </p>
                       </div>
                     </div>
@@ -176,9 +163,12 @@ function PaymentFailedContent() {
                     <div className="flex items-start space-x-3 p-3 bg-orange-50 rounded-lg">
                       <Phone className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">{getTranslation(currentLang, "callYourBank")}</h4>
+                        <h4 className="font-semibold text-sm">{t("paymentFailed.issues.block.title")}</h4>
                         <p className="text-xs text-gray-600 mt-1">
-                          {getTranslation(currentLang, "callYourBankDescription")}
+                          {t("paymentFailed.issues.block.desc")}
+                        </p>
+                        <p className="text-xs text-blue-700 mt-1">
+                          {t("paymentFailed.solution")}: {t("paymentFailed.issues.block.solution")}
                         </p>
                       </div>
                     </div>
@@ -186,9 +176,12 @@ function PaymentFailedContent() {
                     <div className="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
                       <Mail className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h4 className="font-semibold text-sm">{getTranslation(currentLang, "contactSupport")}</h4>
+                        <h4 className="font-semibold text-sm">{t("paymentFailed.issues.tech.title")}</h4>
                         <p className="text-xs text-gray-600 mt-1">
-                          {getTranslation(currentLang, "contactSupportDescription")}
+                          {t("paymentFailed.issues.tech.desc")}
+                        </p>
+                        <p className="text-xs text-blue-700 mt-1">
+                          {t("paymentFailed.solution")}: {t("paymentFailed.issues.tech.solution")}
                         </p>
                       </div>
                     </div>
@@ -200,19 +193,24 @@ function PaymentFailedContent() {
             {/* Common Issues */}
             <div className="mt-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                {getTranslation(currentLang, "commonIssues")}
+                {t("paymentFailed.commonIssues")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {commonIssues.map((issue, index) => (
-                  <Card key={index} className="hover:shadow-lg transition-shadow">
+                {[
+                  { tTitle: "paymentFailed.issues.balance.title", tDesc: "paymentFailed.issues.balance.desc", tSol: "paymentFailed.issues.balance.solution" },
+                  { tTitle: "paymentFailed.issues.card.title", tDesc: "paymentFailed.issues.card.desc", tSol: "paymentFailed.issues.card.solution" },
+                  { tTitle: "paymentFailed.issues.block.title", tDesc: "paymentFailed.issues.block.desc", tSol: "paymentFailed.issues.block.solution" },
+                  { tTitle: "paymentFailed.issues.tech.title", tDesc: "paymentFailed.issues.tech.desc", tSol: "paymentFailed.issues.tech.solution" },
+                ].map((i, idx) => (
+                  <Card key={idx} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
-                      <CardTitle className="text-lg">{issue.title}</CardTitle>
-                      <CardDescription>{issue.description}</CardDescription>
+                      <CardTitle className="text-lg">{t(i.tTitle as TranslationKey)}</CardTitle>
+                      <CardDescription>{t(i.tDesc as TranslationKey)}</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="bg-blue-50 p-3 rounded-lg">
                         <p className="text-sm text-blue-800">
-                          <strong>{getTranslation(currentLang, "solution")}:</strong> {issue.solution}
+                          <strong>{t("paymentFailed.solution")}:</strong> {t(i.tSol as TranslationKey)}
                         </p>
                       </div>
                     </CardContent>
@@ -225,22 +223,22 @@ function PaymentFailedContent() {
             <div className="mt-12 text-center">
               <Card className="max-w-2xl mx-auto">
                 <CardHeader>
-                  <CardTitle>{getTranslation(currentLang, "stillHavingTrouble")}</CardTitle>
-                  <CardDescription>{getTranslation(currentLang, "supportTeamHere")}</CardDescription>
+                  <CardTitle>{t("paymentFailed.support.title")}</CardTitle>
+                  <CardDescription>{t("paymentFailed.support.subtitle")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="text-center">
                       <Phone className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                      <h3 className="font-semibold">{getTranslation(currentLang, "phoneSupport")}</h3>
+                      <h3 className="font-semibold">{t("contact.phoneSupport")}</h3>
                       <p className="text-sm text-gray-600">+1 (555) 123-4567</p>
-                      <p className="text-xs text-gray-500">{getTranslation(currentLang, "mondayFriday")}</p>
+                      <p className="text-xs text-gray-500">{t("contact.mondayFriday")}</p>
                     </div>
                     <div className="text-center">
                       <Mail className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                      <h3 className="font-semibold">{getTranslation(currentLang, "emailSupport")}</h3>
+                      <h3 className="font-semibold">{t("pricing.emailSupport")}</h3>
                       <p className="text-sm text-gray-600">support@visaflowcrm.com</p>
-                      <p className="text-xs text-gray-500">{getTranslation(currentLang, "responseWithin24")}</p>
+                      <p className="text-xs text-gray-500">{t("contact.response24Hours")}</p>
                     </div>
                   </div>
 
@@ -248,12 +246,12 @@ function PaymentFailedContent() {
                     <Link href="/contact" className="flex-1">
                       <Button className="w-full bg-blue-600 hover:bg-blue-700">
                         <Mail className="mr-2 h-4 w-4" />
-                        {getTranslation(currentLang, "contactSupportTeam")}
+                        {t("paymentFailed.support.contactTeam")}
                       </Button>
                     </Link>
                     <Button variant="outline" className="flex-1 bg-transparent">
                       <Phone className="mr-2 h-4 w-4" />
-                      {getTranslation(currentLang, "callNow")}
+                      {t("contact.callNow")}
                     </Button>
                   </div>
                 </CardContent>
