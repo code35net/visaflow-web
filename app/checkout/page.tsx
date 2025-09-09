@@ -66,8 +66,8 @@ function CheckoutContent() {
 const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
   monthly: {
     nameKey: "pricing.monthlyPlan",
-    basePrice: 72.45,
-    price: "€ 72.45",
+    basePrice: 79,
+    price: "€ 79",
     periodKey: "pricing.month",
     descriptionKey: "pricing.smallOfficesIdeal",
     featureKeys: [
@@ -80,11 +80,11 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
   },
   yearly: {
     nameKey: "pricing.yearlyPlan",
-    basePrice: 695.52,
-    price: "€ 695.52",
+    basePrice: 695,
+    price: "€ 695",
     periodKey: "pricing.year",
-    originalPrice: "€ 869.40",
-    originalBasePrice: 828,
+    originalPrice: "€ 948",
+    originalBasePrice: 948,
     discountKey: "pricing.discount20",
     descriptionKey: "pricing.growingOfficesBest",
     featureKeys: [
