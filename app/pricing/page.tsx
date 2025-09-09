@@ -129,7 +129,7 @@ export default function PricingPage() {
                 </CardDescription>
                 <div className="mt-6">
                   <div className="text-center">
-                    <span className="text-lg text-gray-400 line-through">€ 869.4</span>
+                    <span className="text-lg text-gray-400 line-through">€ 948</span>
                   </div>
                   <div className="text-4xl font-bold text-blue-600 text-center mt-2">
                     € 695 <small>/ {getTranslation(currentLang, "pricing.year").toLowerCase()}</small>
