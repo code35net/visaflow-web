@@ -104,7 +104,7 @@ export const translations = {
     "pricing": {
       "title": "Fiyatlandırma",
       "subtitle": "Vize operasyonlarınız için ihtiyacınız olan herşey VisaFlow CRM ile.",
-      "noteFirst100": "Üstelik yıllık ödemelerde %20 indirim ve peşin fiyatına 3 taksit fırsatı",
+      "noteFirst100": "Üstelik yıllık ödemelerde %25'den fazla indirim ve peşin fiyatına 3 taksit fırsatı",
       "monthlyPlan": "Aylık Plan",
       "yearlyPlan": "Yıllık Plan",
       "month": "Ay",
@@ -610,7 +610,7 @@ export const translations = {
     "pricing": {
       "title": "Pricing",
       "subtitle": "Everything you need for visa operations with VisaFlow CRM.",
-      "noteFirst100": "Plus 20% discount on annual payments and 3 installments at no extra cost",
+      "noteFirst100": "Moreover, more than 25% discount on annual payments and 3 installments at the cash price.",
       "monthlyPlan": "Monthly Plan",
       "yearlyPlan": "Annual Plan",
       "month": "Month",
