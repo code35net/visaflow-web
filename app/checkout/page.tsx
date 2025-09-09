@@ -272,12 +272,12 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                       </div>
                     </div>
 
-                    <div className="bg-blue-50 p-4 rounded-lg">
+                    {/*<div className="bg-blue-50 p-4 rounded-lg">
                       <div className="flex items-center text-sm text-blue-800">
                         <Shield className="h-4 w-4 mr-2" />
-                       {/* {t("pricing.freeTrial14Days")} */}
+                        {t("pricing.freeTrial14Days")} 
                       </div>
-                    </div>
+                    </div>*/}
                   </CardContent>
                 </Card>
               </div>
