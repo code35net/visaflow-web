@@ -64,7 +64,7 @@ export default function PricingPage() {
                   {getTranslation(currentLang, "pricing.smallOfficesIdeal")}
                 </CardDescription>
                 <div className="text-4xl font-bold text-blue-600 mt-6">
-                  €69 <small>/ {getTranslation(currentLang, "pricing.month").toLowerCase()}</small>
+                  €79 <small>/ {getTranslation(currentLang, "pricing.month").toLowerCase()}</small>
                 </div>
               </CardHeader>
               <CardContent className="flex flex-col flex-grow">
@@ -132,7 +132,7 @@ export default function PricingPage() {
                     <span className="text-lg text-gray-400 line-through">€ 869.4</span>
                   </div>
                   <div className="text-4xl font-bold text-blue-600 text-center mt-2">
-                    € 695.52 <small>/ {getTranslation(currentLang, "pricing.year").toLowerCase()}</small>
+                    € 695 <small>/ {getTranslation(currentLang, "pricing.year").toLowerCase()}</small>
                   </div>
                 </div>
 
