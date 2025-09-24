@@ -68,8 +68,8 @@ export function Navigation() {
           <div className="hidden md:flex items-center space-x-4">
            <LanguageSelector /> 
             <Link
-                key="https://app.visaflow.tr/"
-                href="https://app.visaflow.tr/" target="_blank" rel="noopener noreferrer">
+                key="https://crm.visaflow.tr/"
+                href="https://crm.visaflow.tr/" target="_blank" rel="noopener noreferrer">
             <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "navigation.login")}</Button>
             </Link>
             {/* <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "freeTrial")}</Button> */}
