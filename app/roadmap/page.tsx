@@ -1,11 +1,17 @@
 // Updated Roadmap with grouped sections and full card content
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { getTranslation, type Language } from "@/lib/translations"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useState, useEffect } from "react";
+import { getTranslation, type Language } from "@/lib/translations";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   Calendar,
   CheckCircle,
@@ -15,20 +21,28 @@ import {
   Smartphone,
   Bot,
   BarChart3,
-} from "lucide-react"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
+} from "lucide-react";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 
 export default function RoadmapPage() {
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
-    const handleLanguageChange = (event: CustomEvent) => setCurrentLang(event.detail as Language)
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
+    const handleLanguageChange = (event: CustomEvent) =>
+      setCurrentLang(event.detail as Language);
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -52,7 +66,6 @@ export default function RoadmapPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto space-y-20">
-
             {/* In Development */}
             <div>
               <div className="flex items-center mb-8">
@@ -63,7 +76,9 @@ export default function RoadmapPage() {
                   <h2 className="text-2xl font-bold text-gray-900">
                     {getTranslation(currentLang, "roadmap.inDevelopment")}
                   </h2>
-                  <Badge className="bg-blue-100 text-blue-800">Temmuz – Ekim 2025</Badge>
+                  <Badge className="bg-blue-100 text-blue-800">
+                    Q1 – Q2 2026
+                  </Badge>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,8 +87,20 @@ export default function RoadmapPage() {
                     <div className="flex items-center space-x-3">
                       <Smartphone className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "roadmap.customerPortal")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "roadmap.customerPortalDescription")}</CardDescription>
+                        <CardTitle className="flex items-center gap-2">
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.customerPortal",
+                          )}
+                          <Badge className="bg-blue-100 text-blue-800 text-xs">
+                            v2
+                          </Badge>
+                        </CardTitle>
+                        <CardDescription>
+                          {currentLang === "tr"
+                            ? "Gelişmiş müşteri self-servis portalı"
+                            : "Advanced customer self-service portal"}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -81,15 +108,21 @@ export default function RoadmapPage() {
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center">
                         <Code className="h-4 w-4 text-blue-600 mr-2" />
-                        {getTranslation(currentLang, "roadmap.applicationStatusTracking")}
+                        {currentLang === "tr"
+                          ? "Online ödeme entegrasyonu"
+                          : "Online payment integration"}
                       </li>
                       <li className="flex items-center">
                         <Code className="h-4 w-4 text-blue-600 mr-2" />
-                        {getTranslation(currentLang, "roadmap.documentUploadSystem")}
+                        {currentLang === "tr"
+                          ? "Anlık mesajlaşma sistemi"
+                          : "Real-time messaging system"}
                       </li>
                       <li className="flex items-center">
                         <Code className="h-4 w-4 text-blue-600 mr-2" />
-                        {getTranslation(currentLang, "roadmap.customerListing")}
+                        {currentLang === "tr"
+                          ? "Randevu planlama ve takvim"
+                          : "Appointment scheduling & calendar"}
                       </li>
                     </ul>
                   </CardContent>
@@ -100,8 +133,18 @@ export default function RoadmapPage() {
                     <div className="flex items-center space-x-3">
                       <BarChart3 className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "roadmap.advancedAnalytics")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "roadmap.advancedAnalyticsDescription")}</CardDescription>
+                        <CardTitle>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.advancedAnalytics",
+                          )}
+                        </CardTitle>
+                        <CardDescription>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.advancedAnalyticsDescription",
+                          )}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -109,15 +152,24 @@ export default function RoadmapPage() {
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center">
                         <Code className="h-4 w-4 text-blue-600 mr-2" />
-                        {getTranslation(currentLang, "roadmap.realTimeDashboard")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.realTimeDashboard",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <Code className="h-4 w-4 text-blue-600 mr-2" />
-                        {getTranslation(currentLang, "roadmap.customizableReports")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.customizableReports",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <Code className="h-4 w-4 text-blue-600 mr-2" />
-                        {getTranslation(currentLang, "roadmap.predictiveAnalysis")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.predictiveAnalysis",
+                        )}
                       </li>
                     </ul>
                   </CardContent>
@@ -141,8 +193,15 @@ export default function RoadmapPage() {
                     <div className="flex items-center space-x-3">
                       <Bot className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "roadmap.aiAssistant")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "roadmap.aiAssistantDescription")}</CardDescription>
+                        <CardTitle>
+                          {getTranslation(currentLang, "roadmap.aiAssistant")}
+                        </CardTitle>
+                        <CardDescription>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.aiAssistantDescription",
+                          )}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -150,11 +209,17 @@ export default function RoadmapPage() {
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center">
                         <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "roadmap.automaticFormFilling")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.automaticFormFilling",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "roadmap.smartSuggestionSystem")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.smartSuggestionSystem",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <Clock className="h-4 w-4 text-orange-500 mr-2" />
@@ -169,8 +234,15 @@ export default function RoadmapPage() {
                     <div className="flex items-center space-x-3">
                       <Smartphone className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "roadmap.mobileApp")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "roadmap.mobileAppDescription")}</CardDescription>
+                        <CardTitle>
+                          {getTranslation(currentLang, "roadmap.mobileApp")}
+                        </CardTitle>
+                        <CardDescription>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.mobileAppDescription",
+                          )}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -182,11 +254,17 @@ export default function RoadmapPage() {
                       </li>
                       <li className="flex items-center">
                         <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "roadmap.pushNotifications")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.pushNotifications",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <Clock className="h-4 w-4 text-orange-500 mr-2" />
-                        {getTranslation(currentLang, "roadmap.cameraIntegration")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.cameraIntegration",
+                        )}
                       </li>
                     </ul>
                   </CardContent>
@@ -208,10 +286,23 @@ export default function RoadmapPage() {
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-center space-x-3">
-                      <Smartphone className="h-8 w-8 text-blue-600" />
+                      <Smartphone className="h-8 w-8 text-green-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "roadmap.customerPortal")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "roadmap.customerPortalDescription")}</CardDescription>
+                        <CardTitle className="flex items-center gap-2">
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.customerPortal",
+                          )}
+                          <Badge className="bg-green-100 text-green-800 text-xs">
+                            v1
+                          </Badge>
+                        </CardTitle>
+                        <CardDescription>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.customerPortalDescription",
+                          )}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -219,11 +310,17 @@ export default function RoadmapPage() {
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center">
                         <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "roadmap.applicationStatusTracking")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.applicationStatusTracking",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                        {getTranslation(currentLang, "roadmap.documentUploadSystem")}
+                        {getTranslation(
+                          currentLang,
+                          "roadmap.documentUploadSystem",
+                        )}
                       </li>
                       <li className="flex items-center">
                         <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
@@ -238,8 +335,18 @@ export default function RoadmapPage() {
                     <div className="flex items-center space-x-3">
                       <BarChart3 className="h-8 w-8 text-blue-600" />
                       <div>
-                        <CardTitle>{getTranslation(currentLang, "roadmap.normalAnalytics")}</CardTitle>
-                        <CardDescription>{getTranslation(currentLang, "roadmap.normalAnalyticsDescription")}</CardDescription>
+                        <CardTitle>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.normalAnalytics",
+                          )}
+                        </CardTitle>
+                        <CardDescription>
+                          {getTranslation(
+                            currentLang,
+                            "roadmap.normalAnalyticsDescription",
+                          )}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -262,7 +369,6 @@ export default function RoadmapPage() {
                 </Card>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -277,7 +383,10 @@ export default function RoadmapPage() {
               {getTranslation(currentLang, "roadmap.digitalizeVisaOperations")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
+              >
                 {getTranslation(currentLang, "hero.startFreeTrial")}
               </Button>
             </div>
@@ -287,5 +396,5 @@ export default function RoadmapPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

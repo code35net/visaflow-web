@@ -1,19 +1,36 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, Suspense, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Navigation } from "@/components/navigation"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { CreditCard, Shield, ArrowLeft, CheckCircle, Plus, Minus } from "lucide-react"
-import Link from "next/link"
-import { useSearchParams, useRouter } from "next/navigation"
-import { getTranslation, type Language, type TranslationKey } from "@/lib/translations"
+import { useState, Suspense, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Navigation } from "@/components/navigation";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  CreditCard,
+  Shield,
+  ArrowLeft,
+  CheckCircle,
+  Plus,
+  Minus,
+} from "lucide-react";
+import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import {
+  getTranslation,
+  type Language,
+  type TranslationKey,
+} from "@/lib/translations";
 
 function CheckoutContent() {
   const [formData, setFormData] = useState({
@@ -31,129 +48,149 @@ function CheckoutContent() {
     expiryDate: "",
     cvv: "",
     cardName: "",
-  })
+  });
 
-  const [additionalUsers, setAdditionalUsers] = useState(0)
-  const [isProcessing, setIsProcessing] = useState(false)
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const plan = (searchParams.get("plan") as "monthly" | "yearly" | "additional") || "monthly"
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const [additionalUsers, setAdditionalUsers] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const plan =
+    (searchParams.get("plan") as "monthly" | "yearly" | "additional") ||
+    "monthly";
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
-    const handleLanguageChange = (event: CustomEvent) => setCurrentLang(event.detail as Language)
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
+    const handleLanguageChange = (event: CustomEvent) =>
+      setCurrentLang(event.detail as Language);
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
 
   // Yardımcı çeviri fonksiyonu: sadece TranslationKey kabul eder
-  const t = (key: TranslationKey) => getTranslation(currentLang, key)
+  const t = (key: TranslationKey) => getTranslation(currentLang, key);
 
   type PlanConfig = {
-  nameKey: TranslationKey
-  basePrice: number
-  price: string
-  periodKey: TranslationKey
-  descriptionKey: TranslationKey
-  featureKeys: readonly TranslationKey[]
-  originalPrice?: string
-  originalBasePrice?: number
-  discountKey?: TranslationKey
-}
+    nameKey: TranslationKey;
+    basePrice: number;
+    price: string;
+    periodKey: TranslationKey;
+    descriptionKey: TranslationKey;
+    featureKeys: readonly TranslationKey[];
+    originalPrice?: string;
+    originalBasePrice?: number;
+    discountKey?: TranslationKey;
+  };
 
-const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
-  monthly: {
-    nameKey: "pricing.monthlyPlan",
-    basePrice: 79,
-    price: "€ 79",
-    periodKey: "pricing.month",
-    descriptionKey: "pricing.smallOfficesIdeal",
-    featureKeys: [
-      "pricing.unlimitedCustomers",
-      "pricing.allBasicFeatures",
-      "pricing.emailSupport",
-      "pricing.storage5GB",
-      "pricing.basicReporting",
-    ],
-  },
-  yearly: {
-    nameKey: "pricing.yearlyPlan",
-    basePrice: 695,
-    price: "€ 695",
-    periodKey: "pricing.year",
-    originalPrice: "€ 948",
-    originalBasePrice: 948,
-    discountKey: "pricing.discount20",
-    descriptionKey: "pricing.growingOfficesBest",
-    featureKeys: [
-      "pricing.allPremiumFeatures",
-      "pricing.storage50GB",
-      "pricing.advancedReporting",
-      "pricing.freeTrainingSetup",
-      "contact.phoneSupport",
-    ],
-  },
-  additional: {
-    nameKey: "pricing.additionalUser",
-    basePrice: 2,
-    price: "€ 2",
-    periodKey: "pricing.month",
-    descriptionKey: "pricing.expandYourTeam",
-    featureKeys: [
-      "pricing.fullSystemAccess",
-      "pricing.roleBasedAuth",
-      "pricing.personalDashboard",
-      "pricing.activityTracking",
-    ],
-  },
-}
- 
+  const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
+    monthly: {
+      nameKey: "pricing.monthlyPlan",
+      basePrice: 79,
+      price: "€ 79",
+      periodKey: "pricing.month",
+      descriptionKey: "pricing.smallOfficesIdeal",
+      featureKeys: [
+        "pricing.unlimitedCustomers",
+        "pricing.allBasicFeatures",
+        "pricing.emailSupport",
+        "pricing.storage5GB",
+        "pricing.basicReporting",
+      ],
+    },
+    yearly: {
+      nameKey: "pricing.yearlyPlan",
+      basePrice: 695,
+      price: "€ 695",
+      periodKey: "pricing.year",
+      originalPrice: "€ 948",
+      originalBasePrice: 948,
+      discountKey: "pricing.discount20",
+      descriptionKey: "pricing.growingOfficesBest",
+      featureKeys: [
+        "pricing.allPremiumFeatures",
+        "pricing.storage50GB",
+        "pricing.advancedReporting",
+        "pricing.freeTrainingSetup",
+        "contact.phoneSupport",
+      ],
+    },
+    additional: {
+      nameKey: "pricing.additionalUser",
+      basePrice: 2,
+      price: "€ 2",
+      periodKey: "pricing.month",
+      descriptionKey: "pricing.expandYourTeam",
+      featureKeys: [
+        "pricing.fullSystemAccess",
+        "pricing.roleBasedAuth",
+        "pricing.personalDashboard",
+        "pricing.activityTracking",
+      ],
+    },
+  };
 
-  const currentPlan = planDetails[plan]
+  const currentPlan = planDetails[plan];
 
   // Tutar hesapları
   const calculateTotals = () => {
     let subtotal =
       plan === "additional"
         ? currentPlan.basePrice * Math.max(1, additionalUsers)
-        : currentPlan.basePrice + additionalUsers * 2
+        : currentPlan.basePrice + additionalUsers * 2;
 
-    const vat = subtotal * 0.2
-    const total = subtotal + vat
+    const vat = subtotal * 0.2;
+    const total = subtotal + vat;
 
     return {
       subtotal: subtotal.toFixed(2),
       vat: vat.toFixed(2),
       total: total.toFixed(2),
-    }
-  }
+    };
+  };
 
-  const totals = calculateTotals()
+  const totals = calculateTotals();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleUserCountChange = (increment: boolean) => {
-    if (increment) setAdditionalUsers((p) => p + 1)
-    else setAdditionalUsers((p) => (plan === "additional" ? Math.max(1, p - 1) : Math.max(0, p - 1)))
-  }
+    if (increment) setAdditionalUsers((p) => p + 1);
+    else
+      setAdditionalUsers((p) =>
+        plan === "additional" ? Math.max(1, p - 1) : Math.max(0, p - 1),
+      );
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsProcessing(true)
+    e.preventDefault();
+    setIsProcessing(true);
     setTimeout(() => {
-      const isSuccess = Math.random() > 0.2
-      if (isSuccess) router.push(`/payment-success?plan=${plan}&users=${additionalUsers}&total=${totals.total}`)
-      else router.push(`/payment-failed?plan=${plan}&users=${additionalUsers}&total=${totals.total}`)
-    }, 3000)
-  }
+      const isSuccess = Math.random() > 0.2;
+      if (isSuccess)
+        router.push(
+          `/payment-success?plan=${plan}&users=${additionalUsers}&total=${totals.total}`,
+        );
+      else
+        router.push(
+          `/payment-failed?plan=${plan}&users=${additionalUsers}&total=${totals.total}`,
+        );
+    }, 3000);
+  };
 
   // Dönem metni: tüm planlar için aynı format
-  const periodText = `/ ${t(currentPlan.periodKey).toLowerCase()}`
+  const periodText = `/ ${t(currentPlan.periodKey).toLowerCase()}`;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -163,12 +200,19 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
       <section className="py-12 bg-white border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <Link href="/pricing" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
+            <Link
+              href="/pricing"
+              className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6"
+            >
               <ArrowLeft className="h-4 w-4 mr-2" />
               {t("checkout.backToPricing")}
             </Link>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t("checkout.title")}</h1>
-            <p className="text-xl text-gray-600">{t("checkout.securePayment")}</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t("checkout.title")}
+            </h1>
+            <p className="text-xl text-gray-600">
+              {t("checkout.securePayment")}
+            </p>
           </div>
         </div>
       </section>
@@ -190,13 +234,20 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                   <CardContent className="space-y-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-semibold">{t(currentPlan.nameKey)}</h3>
-                        <p className="text-gray-600 text-sm">{t(currentPlan.descriptionKey)}</p>
+                        <h3 className="font-semibold">
+                          {t(currentPlan.nameKey)}
+                        </h3>
+                        <p className="text-gray-600 text-sm">
+                          {t(currentPlan.descriptionKey)}
+                        </p>
                       </div>
                       <div className="text-right">
-                        {"originalBasePrice" in currentPlan && currentPlan.originalPrice && (
-                          <div className="text-sm text-gray-400 line-through">{currentPlan.originalPrice}</div>
-                        )}
+                        {"originalBasePrice" in currentPlan &&
+                          currentPlan.originalPrice && (
+                            <div className="text-sm text-gray-400 line-through">
+                              {currentPlan.originalPrice}
+                            </div>
+                          )}
                         <div className="font-bold text-lg">
                           {currentPlan.price} <small>{periodText}</small>
                         </div>
@@ -206,19 +257,27 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                     {/* Additional Users */}
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <div className="flex items-center justify-between mb-3">
-                        <Label className="font-semibold">{t("checkout.additionalUsersCount")}</Label>
+                        <Label className="font-semibold">
+                          {t("checkout.additionalUsersCount")}
+                        </Label>
                         <div className="flex items-center space-x-3">
                           <Button
                             type="button"
                             variant="outline"
                             size="sm"
                             onClick={() => handleUserCountChange(false)}
-                            disabled={plan !== "additional" ? additionalUsers <= 0 : additionalUsers <= 1}
+                            disabled={
+                              plan !== "additional"
+                                ? additionalUsers <= 0
+                                : additionalUsers <= 1
+                            }
                             className="h-8 w-8 p-0"
                           >
                             <Minus className="h-4 w-4" />
                           </Button>
-                          <span className="font-semibold text-lg w-8 text-center">{additionalUsers}</span>
+                          <span className="font-semibold text-lg w-8 text-center">
+                            {additionalUsers}
+                          </span>
                           <Button
                             type="button"
                             variant="outline"
@@ -246,7 +305,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                     <Separator />
 
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-sm">{t("checkout.includedFeatures")}:</h4>
+                      <h4 className="font-semibold text-sm">
+                        {t("checkout.includedFeatures")}:
+                      </h4>
                       {currentPlan.featureKeys.map((fk) => (
                         <div key={fk} className="flex items-center text-sm">
                           <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
@@ -289,12 +350,16 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                   <Card>
                     <CardHeader>
                       <CardTitle>{t("checkout.personalInformation")}</CardTitle>
-                      <CardDescription>{t("checkout.personalInformationDescription")}</CardDescription>
+                      <CardDescription>
+                        {t("checkout.personalInformationDescription")}
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="firstName">{t("contact.firstName")} *</Label>
+                          <Label htmlFor="firstName">
+                            {t("contact.firstName")} *
+                          </Label>
                           <Input
                             id="firstName"
                             name="firstName"
@@ -305,7 +370,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="lastName">{t("contact.lastName")} *</Label>
+                          <Label htmlFor="lastName">
+                            {t("contact.lastName")} *
+                          </Label>
                           <Input
                             id="lastName"
                             name="lastName"
@@ -342,7 +409,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="company">{t("navigation.company")}</Label>
+                          <Label htmlFor="company">
+                            {t("navigation.company")}
+                          </Label>
                           <Input
                             id="company"
                             name="company"
@@ -359,11 +428,15 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                   <Card>
                     <CardHeader>
                       <CardTitle>{t("checkout.billingAddress")}</CardTitle>
-                      <CardDescription>{t("checkout.billingAddressDescription")}</CardDescription>
+                      <CardDescription>
+                        {t("checkout.billingAddressDescription")}
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="address">{t("contact.address")} *</Label>
+                        <Label htmlFor="address">
+                          {t("contact.address")} *
+                        </Label>
                         <Input
                           id="address"
                           name="address"
@@ -397,7 +470,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="zipCode">{t("checkout.zipCode")}</Label>
+                          <Label htmlFor="zipCode">
+                            {t("checkout.zipCode")}
+                          </Label>
                           <Input
                             id="zipCode"
                             name="zipCode"
@@ -409,7 +484,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                       </div>
 
                       <div>
-                        <Label htmlFor="country">{t("checkout.country")} *</Label>
+                        <Label htmlFor="country">
+                          {t("checkout.country")} *
+                        </Label>
                         <select
                           id="country"
                           name="country"
@@ -438,11 +515,15 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                         <CreditCard className="h-5 w-5 mr-2" />
                         {t("checkout.paymentInformation")}
                       </CardTitle>
-                      <CardDescription>{t("checkout.paymentInformationDescription")}</CardDescription>
+                      <CardDescription>
+                        {t("checkout.paymentInformationDescription")}
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <Label htmlFor="cardName">{t("checkout.cardName")} *</Label>
+                        <Label htmlFor="cardName">
+                          {t("checkout.cardName")} *
+                        </Label>
                         <Input
                           id="cardName"
                           name="cardName"
@@ -454,7 +535,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
                       </div>
 
                       <div>
-                        <Label htmlFor="cardNumber">{t("checkout.cardNumber")} *</Label>
+                        <Label htmlFor="cardNumber">
+                          {t("checkout.cardNumber")} *
+                        </Label>
                         <Input
                           id="cardNumber"
                           name="cardNumber"
@@ -468,7 +551,9 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="expiryDate">{t("checkout.expiryDate")} *</Label>
+                          <Label htmlFor="expiryDate">
+                            {t("checkout.expiryDate")} *
+                          </Label>
                           <Input
                             id="expiryDate"
                             name="expiryDate"
@@ -522,11 +607,21 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
 
                       <p className="text-center text-sm text-gray-500 mt-4">
                         {t("checkout.termsAndPrivacyPrefix")}
-                        <a href="#" className="text-blue-600 hover:underline">
+                        <a
+                          href="/terms"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline"
+                        >
                           {t("checkout.termsOfService")}
                         </a>{" "}
                         {t("checkout.and")}
-                        <a href="#" className="text-blue-600 hover:underline">
+                        <a
+                          href="/privacy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline"
+                        >
                           {t("checkout.privacyPolicy")}
                         </a>
                         {t("checkout.accept")}
@@ -540,7 +635,7 @@ const planDetails: Record<"monthly" | "yearly" | "additional", PlanConfig> = {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 export default function CheckoutPage() {
@@ -548,5 +643,5 @@ export default function CheckoutPage() {
     <Suspense fallback={<div>Loading...</div>}>
       <CheckoutContent />
     </Suspense>
-  )
+  );
 }

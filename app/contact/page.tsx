@@ -1,31 +1,89 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { getTranslation, type Language } from "@/lib/translations"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Globe, Phone, Mail, MapPin, ArrowLeft, Clock, MessageCircle, HeadphonesIcon, Send } from "lucide-react"
-import Link from "next/link"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { getTranslation, type Language } from "@/lib/translations";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  MessageCircle,
+  Send,
+  CheckCircle,
+} from "lucide-react";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 
 export default function ContactPage() {
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
 
     const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
+      setCurrentLang(event.detail as Language);
+    };
 
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.firstName || !formData.email || !formData.message) return;
+
+    setIsSubmitting(true);
+
+    // Simulate API call — in production, this would POST to a real endpoint
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      company: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -54,30 +112,50 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Phone className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">{getTranslation(currentLang, "contact.phoneSupport")}</h3>
-              <p className="text-gray-600 mb-4">{getTranslation(currentLang, "contact.phoneSupportHours")}</p>
-              <p className="text-1xl font-bold text-blue-600 mb-4">+90 (232) 335 35 09</p>
+              <h3 className="text-xl font-semibold mb-4">
+                {getTranslation(currentLang, "contact.phoneSupport")}
+              </h3>
+              <p className="text-gray-600 mb-4">
+                {getTranslation(currentLang, "contact.phoneSupportHours")}
+              </p>
+              <p className="text-1xl font-bold text-blue-600 mb-4">
+                +90 (232) 335 35 09
+              </p>
             </Card>
 
             <Card className="p-8 text-center hover:shadow-lg transition-shadow">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Mail className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">{getTranslation(currentLang, "contact.sendEmail")}</h3>
-              <p className="text-gray-600 mb-4">{getTranslation(currentLang, "contact.emailResponseGuarantee")}</p>
-              <p className="text-lg font-semibold text-blue-600 mb-4">bilgi@visaflow.tr</p>
+              <h3 className="text-xl font-semibold mb-4">
+                {getTranslation(currentLang, "contact.sendEmail")}
+              </h3>
+              <p className="text-gray-600 mb-4">
+                {getTranslation(currentLang, "contact.emailResponseGuarantee")}
+              </p>
+              <p className="text-lg font-semibold text-blue-600 mb-4">
+                bilgi@visaflow.tr
+              </p>
             </Card>
 
             <Card className="p-8 text-center hover:shadow-lg transition-shadow">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <MessageCircle className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">{getTranslation(currentLang, "contact.liveSupport")}</h3>
-              <p className="text-gray-600 mb-4">{getTranslation(currentLang, "contact.instantHelp")}</p>
-              <p className="text-lg font-semibold text-danger-600 mb-4">● {getTranslation(currentLang, "contact.supportStatusOff")}</p>
-              {/* <Button variant="outline" className="w-full bg-transparent">
-                {getTranslation(currentLang, "contact.startChat")}
-              </Button> */}
+              <h3 className="text-xl font-semibold mb-4">
+                {getTranslation(currentLang, "contact.liveSupport")}
+              </h3>
+              <p className="text-gray-600 mb-4">
+                {getTranslation(currentLang, "contact.instantHelp")}
+              </p>
+              <a
+                href="https://wa.me/902323353509"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-lg font-semibold text-green-600 hover:text-green-700 transition-colors"
+              >
+                WhatsApp
+              </a>
             </Card>
           </div>
         </div>
@@ -91,78 +169,193 @@ export default function ContactPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {getTranslation(currentLang, "contact.sendMessage")}
               </h2>
-              <p className="text-xl text-gray-600">{getTranslation(currentLang, "contact.formDescription")}</p>
+              <p className="text-xl text-gray-600">
+                {getTranslation(currentLang, "contact.formDescription")}
+              </p>
             </div>
 
             <div className="grid grid-cols-1">
-              <form className="space-y-6 bg-white p-10 rounded shadow-md w-full">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="firstName">{getTranslation(currentLang, "contact.firstName")}</Label>
-                    <Input
-                      id="firstName"
-                      placeholder={getTranslation(currentLang, "contact.firstNamePlaceholder")}
-                      className="mt-1"
-                    />
+              {isSubmitted ? (
+                <div className="bg-white p-10 rounded shadow-md w-full text-center">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="h-10 w-10 text-green-600" />
                   </div>
-                  <div>
-                    <Label htmlFor="lastName">{getTranslation(currentLang, "contact.lastName")}</Label>
-                    <Input
-                      id="lastName"
-                      placeholder={getTranslation(currentLang, "contact.lastNamePlaceholder")}
-                      className="mt-1"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="email@example.com" className="mt-1" />
-                </div>
-
-                <div>
-                  <Label htmlFor="company">{getTranslation(currentLang, "navigation.company")}</Label>
-                  <Input
-                    id="company"
-                    placeholder={getTranslation(currentLang, "contact.companyNamePlaceholder")}
-                    className="mt-1"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="phone">{getTranslation(currentLang, "contact.phone")}</Label>
-                  <Input id="phone" placeholder="+90 555 123 45 67" className="mt-1" />
-                </div>
-
-                <div>
-                  <Label htmlFor="subject">{getTranslation(currentLang, "contact.subject")}</Label>
-                  <select
-                    id="subject"
-                    className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {currentLang === "tr"
+                      ? "Mesajınız Gönderildi!"
+                      : "Message Sent!"}
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    {currentLang === "tr"
+                      ? "En kısa sürede size dönüş yapacağız. Teşekkür ederiz!"
+                      : "We will get back to you as soon as possible. Thank you!"}
+                  </p>
+                  <Button
+                    onClick={() => setIsSubmitted(false)}
+                    variant="outline"
+                    className="bg-transparent"
                   >
-                    <option value="">{getTranslation(currentLang, "contact.selectSubject")}</option>
-                    <option value="demo">{getTranslation(currentLang, "contact.demoRequest")}</option>
-                    <option value="pricing">{getTranslation(currentLang, "pricing.title")}</option>
-                    <option value="technical">{getTranslation(currentLang, "contact.technicalSupport")}</option>
-                    <option value="partnership">{getTranslation(currentLang, "contact.partnership")}</option>
-                    <option value="other">{getTranslation(currentLang, "contact.other")}</option>
-                  </select>
+                    {currentLang === "tr"
+                      ? "Yeni Mesaj Gönder"
+                      : "Send Another Message"}
+                  </Button>
                 </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 bg-white p-10 rounded shadow-md w-full"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="firstName">
+                        {getTranslation(currentLang, "contact.firstName")} *
+                      </Label>
+                      <Input
+                        id="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        placeholder={getTranslation(
+                          currentLang,
+                          "contact.firstNamePlaceholder",
+                        )}
+                        className="mt-1"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">
+                        {getTranslation(currentLang, "contact.lastName")}
+                      </Label>
+                      <Input
+                        id="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        placeholder={getTranslation(
+                          currentLang,
+                          "contact.lastNamePlaceholder",
+                        )}
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
 
-                <div>
-                  <Label htmlFor="message">{getTranslation(currentLang, "contact.yourMessage")}</Label>
-                  <Textarea
-                    id="message"
-                    placeholder={getTranslation(currentLang, "contact.messagePlaceholder")}
-                    className="mt-1 min-h-[120px]"
-                  />
-                </div>
+                  <div>
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="email@example.com"
+                      className="mt-1"
+                      required
+                    />
+                  </div>
 
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-3">
-                  <Send className="mr-2 h-5 w-5" />
-                  {getTranslation(currentLang, "contact.sendMessageButton")}
-                </Button>
-              </form>
+                  <div>
+                    <Label htmlFor="company">
+                      {getTranslation(currentLang, "navigation.company")}
+                    </Label>
+                    <Input
+                      id="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      placeholder={getTranslation(
+                        currentLang,
+                        "contact.companyNamePlaceholder",
+                      )}
+                      className="mt-1"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="phone">
+                      {getTranslation(currentLang, "contact.phone")}
+                    </Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+90 555 123 45 67"
+                      className="mt-1"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="subject">
+                      {getTranslation(currentLang, "contact.subject")}
+                    </Label>
+                    <select
+                      id="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="">
+                        {getTranslation(currentLang, "contact.selectSubject")}
+                      </option>
+                      <option value="demo">
+                        {getTranslation(currentLang, "contact.demoRequest")}
+                      </option>
+                      <option value="pricing">
+                        {getTranslation(currentLang, "pricing.title")}
+                      </option>
+                      <option value="technical">
+                        {getTranslation(
+                          currentLang,
+                          "contact.technicalSupport",
+                        )}
+                      </option>
+                      <option value="partnership">
+                        {getTranslation(currentLang, "contact.partnership")}
+                      </option>
+                      <option value="other">
+                        {getTranslation(currentLang, "contact.other")}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="message">
+                      {getTranslation(currentLang, "contact.yourMessage")} *
+                    </Label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder={getTranslation(
+                        currentLang,
+                        "contact.messagePlaceholder",
+                      )}
+                      className="mt-1 min-h-[120px]"
+                      required
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-3"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center">
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        {currentLang === "tr"
+                          ? "Gönderiliyor..."
+                          : "Sending..."}
+                      </div>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        {getTranslation(
+                          currentLang,
+                          "contact.sendMessageButton",
+                        )}
+                      </>
+                    )}
+                  </Button>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -171,8 +364,6 @@ export default function ContactPage() {
       {/* Google Maps Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          
-
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Map */}
@@ -203,7 +394,7 @@ export default function ContactPage() {
                         {getTranslation(currentLang, "contact.mainOffice")}
                       </h3>
                       <p className="text-gray-600 mb-4">
-                        İsmet Kaptan Mah. 
+                        İsmet Kaptan Mah.
                         <br />
                         1385 Sokak No:3 D:403
                         <br />
@@ -224,23 +415,36 @@ export default function ContactPage() {
                       </h3>
                       <div className="text-gray-600 space-y-1 text-sm">
                         <div className="flex justify-between">
-                          <span>{getTranslation(currentLang, "contact.mondayFriday")}:</span>
+                          <span>
+                            {getTranslation(
+                              currentLang,
+                              "contact.mondayFriday",
+                            )}
+                            :
+                          </span>
                           <span> 09:00 - 18:00</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>{getTranslation(currentLang, "contact.saturday")}:</span>
-                          <span>{getTranslation(currentLang, "contact.closed")}</span>
+                          <span>
+                            {getTranslation(currentLang, "contact.saturday")}:
+                          </span>
+                          <span>
+                            {getTranslation(currentLang, "contact.closed")}
+                          </span>
                         </div>
                         <div className="flex justify-between">
-                          <span>{getTranslation(currentLang, "contact.sunday")}:</span>
-                          <span>{getTranslation(currentLang, "contact.closed")}</span>
+                          <span>
+                            {getTranslation(currentLang, "contact.sunday")}:
+                          </span>
+                          <span>
+                            {getTranslation(currentLang, "contact.closed")}
+                          </span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </Card>
               </div>
-
             </div>
           </div>
         </div>
@@ -249,5 +453,5 @@ export default function ContactPage() {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
