@@ -1,29 +1,50 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Globe, CheckCircle, ArrowLeft, X, Star, Clock, Users } from "lucide-react"
-import Link from "next/link"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { getTranslation, type Language } from "@/lib/translations"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Globe,
+  CheckCircle,
+  ArrowLeft,
+  X,
+  Star,
+  Clock,
+  Users,
+} from "lucide-react";
+import Link from "next/link";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { getTranslation, type Language } from "@/lib/translations";
 
 export default function PricingPage() {
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
 
     const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
+      setCurrentLang(event.detail as Language);
+    };
 
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -64,50 +85,77 @@ export default function PricingPage() {
                   {getTranslation(currentLang, "pricing.smallOfficesIdeal")}
                 </CardDescription>
                 <div className="text-4xl font-bold text-blue-600 mt-6">
-                  €79 <small>/ {getTranslation(currentLang, "pricing.month").toLowerCase()}</small>
+                  €79{" "}
+                  <small>
+                    /{" "}
+                    {getTranslation(currentLang, "pricing.month").toLowerCase()}
+                  </small>
                 </div>
               </CardHeader>
               <CardContent className="flex flex-col flex-grow">
                 <ul className="space-y-4 mb-8 flex-grow">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.unlimitedCustomers")}</span>
+                    <span>
+                      {getTranslation(
+                        currentLang,
+                        "pricing.unlimitedCustomers",
+                      )}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.allBasicFeatures")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.allBasicFeatures")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.fullSystemAccess")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.fullSystemAccess")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.roleBasedAuth")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.roleBasedAuth")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.personalDashboard")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.personalDashboard")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.emailSupport")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.emailSupport")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.storage5GB")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.storage5GB")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.basicReporting")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.basicReporting")}
+                    </span>
                   </li>
                 </ul>
                 <div className="mt-auto">
-                  <Link href="/checkout?plan=monthly">
+                  <a
+                    href="https://app.visaflow.tr/register?plan=monthly"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-3">
                       {getTranslation(currentLang, "pricing.buyNow")}
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -129,10 +177,19 @@ export default function PricingPage() {
                 </CardDescription>
                 <div className="mt-6">
                   <div className="text-center">
-                    <span className="text-lg text-gray-400 line-through">€ 948</span>
+                    <span className="text-lg text-gray-400 line-through">
+                      € 948
+                    </span>
                   </div>
                   <div className="text-4xl font-bold text-blue-600 text-center mt-2">
-                    € 695 <small>/ {getTranslation(currentLang, "pricing.year").toLowerCase()}</small>
+                    € 758{" "}
+                    <small>
+                      /{" "}
+                      {getTranslation(
+                        currentLang,
+                        "pricing.year",
+                      ).toLowerCase()}
+                    </small>
                   </div>
                 </div>
 
@@ -144,31 +201,48 @@ export default function PricingPage() {
                 <ul className="space-y-4 mb-8 flex-grow">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.allPremiumFeatures")}</span>
+                    <span>
+                      {getTranslation(
+                        currentLang,
+                        "pricing.allPremiumFeatures",
+                      )}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.storage50GB")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.storage50GB")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.advancedReporting")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.advancedReporting")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.freeTrainingSetup")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.freeTrainingSetup")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "contact.phoneSupport")}</span>
+                    <span>
+                      {getTranslation(currentLang, "contact.phoneSupport")}
+                    </span>
                   </li>
                 </ul>
                 <div className="mt-auto">
-                  <Link href="/checkout?plan=yearly">
+                  <a
+                    href="https://app.visaflow.tr/register?plan=yearly"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-3">
                       {getTranslation(currentLang, "pricing.buyNow")}
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -186,33 +260,50 @@ export default function PricingPage() {
                   {getTranslation(currentLang, "pricing.expandYourTeam")}
                 </CardDescription>
                 <div className="text-4xl font-bold text-blue-600 mt-6">
-                  €2 <small>/ {getTranslation(currentLang, "pricing.month").toLowerCase()}</small>
+                  €2{" "}
+                  <small>
+                    /{" "}
+                    {getTranslation(currentLang, "pricing.month").toLowerCase()}
+                  </small>
                 </div>
               </CardHeader>
               <CardContent className="flex flex-col flex-grow">
                 <ul className="space-y-4 mb-8 flex-grow">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.activityTracking")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.activityTracking")}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.individualReporting")}</span>
+                    <span>
+                      {getTranslation(
+                        currentLang,
+                        "pricing.individualReporting",
+                      )}
+                    </span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span>{getTranslation(currentLang, "pricing.mobileAppAccess")}</span>
+                    <span>
+                      {getTranslation(currentLang, "pricing.mobileAppAccess")}
+                    </span>
                   </li>
                 </ul>
                 <div className="mt-auto">
-                  <Link href="/checkout?plan=additional">
+                  <a
+                    href="https://app.visaflow.tr/register"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button
                       variant="outline"
                       className="w-full text-lg py-3 bg-transparent border-2 border-blue-600 text-blue-600 hover:bg-blue-50"
                     >
                       {getTranslation(currentLang, "pricing.addUser")}
                     </Button>
-                  </Link>
+                  </a>
                   <p className="text-center text-sm text-gray-500 mt-4">
                     {getTranslation(currentLang, "pricing.additionalToPlan")}
                   </p>
@@ -241,7 +332,10 @@ export default function PricingPage() {
                     {getTranslation(currentLang, "pricing.paymentMethodsTitle")}
                   </h4>
                   <p className="text-gray-600 text-sm">
-                    {getTranslation(currentLang, "pricing.paymentMethodsDescription")}
+                    {getTranslation(
+                      currentLang,
+                      "pricing.paymentMethodsDescription",
+                    )}
                   </p>
                 </div>
                 <div>
@@ -249,7 +343,10 @@ export default function PricingPage() {
                     {getTranslation(currentLang, "pricing.cancellationTitle")}
                   </h4>
                   <p className="text-gray-600 text-sm">
-                    {getTranslation(currentLang, "pricing.cancellationDescription")}
+                    {getTranslation(
+                      currentLang,
+                      "pricing.cancellationDescription",
+                    )}
                   </p>
                 </div>
                 <div>
@@ -263,7 +360,6 @@ export default function PricingPage() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -344,7 +440,8 @@ export default function PricingPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "common.getStartedNow")}, {getTranslation(currentLang, "common.noRisk")}
+              {getTranslation(currentLang, "common.getStartedNow")},{" "}
+              {getTranslation(currentLang, "common.noRisk")}
             </h2>
             <p className="text-xl text-gray-600 mb-8">
               {getTranslation(currentLang, "common.testWithoutRisk")}
@@ -357,7 +454,9 @@ export default function PricingPage() {
               </Link>
             </div>
             <p className="text-sm text-gray-500 mt-4">
-              {getTranslation(currentLang, "common.noCreditCard")} • {getTranslation(currentLang, "common.cancelAnytime")} • {getTranslation(currentLang, "common.support24_7")}
+              {getTranslation(currentLang, "common.noCreditCard")} •{" "}
+              {getTranslation(currentLang, "common.cancelAnytime")} •{" "}
+              {getTranslation(currentLang, "common.support24_7")}
             </p>
           </div>
         </div>
@@ -366,5 +465,5 @@ export default function PricingPage() {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }

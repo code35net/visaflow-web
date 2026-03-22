@@ -1,51 +1,72 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { LanguageSelector } from "@/components/language-selector"
-import { Globe, Menu, X } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { getTranslation, type Language } from "@/lib/translations"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { LanguageSelector } from "@/components/language-selector";
+import { Globe, Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { getTranslation, type Language } from "@/lib/translations";
 
 export function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
-  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
+  const pathname = usePathname();
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
 
     const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
+      setCurrentLang(event.detail as Language);
+    };
 
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
 
   const navItems = [
     { href: "/", label: getTranslation(currentLang, "navigation.home") },
-    { href: "/features", label: getTranslation(currentLang, "navigation.features") },
-    { href: "/roadmap", label: getTranslation(currentLang, "navigation.roadmap") },
-    { href: "/pricing", label: getTranslation(currentLang, "navigation.pricing") },
-    { href: "/testimonials", label: getTranslation(currentLang, "navigation.testimonials") },
-    { href: "/contact", label: getTranslation(currentLang, "navigation.contact") },
-  ]
+    {
+      href: "/features",
+      label: getTranslation(currentLang, "navigation.features"),
+    },
+    {
+      href: "/roadmap",
+      label: getTranslation(currentLang, "navigation.roadmap"),
+    },
+    {
+      href: "/pricing",
+      label: getTranslation(currentLang, "navigation.pricing"),
+    },
+    {
+      href: "/references",
+      label: getTranslation(currentLang, "navigation.testimonials"),
+    },
+    {
+      href: "/contact",
+      label: getTranslation(currentLang, "navigation.contact"),
+    },
+  ];
 
   return (
     <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center space-x-2">
-            
             <span className="text-xl font-bold text-gray-900">
               <img
-                  src="/visaflow-logo.png"
-                  alt="VisaFlow Logo"
-                  className="h-10 w-auto"
-                />
+                src="/visaflow-logo.png"
+                alt="VisaFlow Logo"
+                className="h-10 w-auto"
+              />
             </span>
           </Link>
 
@@ -56,7 +77,9 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 className={`transition-colors ${
-                  pathname === item.href ? "text-blue-600 font-medium" : "text-gray-600 hover:text-blue-600"
+                  pathname === item.href
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-600 hover:text-blue-600"
                 }`}
               >
                 {item.label}
@@ -66,11 +89,16 @@ export function Navigation() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-           <LanguageSelector /> 
+            <LanguageSelector />
             <Link
-                key="https://app.visaflow.tr/"
-                href="https://app.visaflow.tr/" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "navigation.login")}</Button>
+              key="https://app.visaflow.tr/"
+              href="https://app.visaflow.tr/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-blue-600 hover:bg-blue-700">
+                {getTranslation(currentLang, "navigation.login")}
+              </Button>
             </Link>
             {/* <Button className="bg-blue-600 hover:bg-blue-700">{getTranslation(currentLang, "freeTrial")}</Button> */}
           </div>
@@ -78,8 +106,16 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
             {/* <LanguageSelector /> */}
-            <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -106,12 +142,11 @@ export function Navigation() {
                 <Button className="w-full bg-blue-600 hover:bg-blue-700">
                   {getTranslation(currentLang, "navigation.login")}
                 </Button>
-
               </div>
             </nav>
           </div>
         )}
       </div>
     </header>
-  )
+  );
 }
