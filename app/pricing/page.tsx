@@ -85,7 +85,7 @@ export default function PricingPage() {
                   {getTranslation(currentLang, "pricing.smallOfficesIdeal")}
                 </CardDescription>
                 <div className="text-4xl font-bold text-blue-600 mt-6">
-                  €79{" "}
+                  €89{" "}
                   <small>
                     /{" "}
                     {getTranslation(currentLang, "pricing.month").toLowerCase()}
@@ -178,11 +178,11 @@ export default function PricingPage() {
                 <div className="mt-6">
                   <div className="text-center">
                     <span className="text-lg text-gray-400 line-through">
-                      € 948
+                      € 1.068
                     </span>
                   </div>
                   <div className="text-4xl font-bold text-blue-600 text-center mt-2">
-                    € 758{" "}
+                    € 748{" "}
                     <small>
                       /{" "}
                       {getTranslation(
@@ -194,7 +194,7 @@ export default function PricingPage() {
                 </div>
 
                 <Badge className="bg-green-100 text-green-800 hover:bg-green-100 mt-2">
-                  {getTranslation(currentLang, "pricing.discount20")}
+                  {getTranslation(currentLang, "pricing.discount30")}
                 </Badge>
               </CardHeader>
               <CardContent className="flex flex-col flex-grow">

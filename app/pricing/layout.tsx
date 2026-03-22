@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Fiyatlandırma",
   description:
-    "VisaFlow CRM fiyatlandırma planları. Aylık €79, yıllık %20 indirimle €758. 2 kullanıcı dahil, ek kullanıcı €2/ay. Tüm planlarda sınırsız müşteri ve başvuru.",
+    "VisaFlow CRM fiyatlandırma planları. Aylık €89, yıllık %30 indirimle €748. 2 kullanıcı dahil, ek kullanıcı €2/ay. Tüm planlarda sınırsız müşteri ve başvuru.",
   alternates: { canonical: "/pricing" },
 };
 
