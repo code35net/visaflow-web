@@ -1,45 +1,55 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Globe, ChevronDown } from "lucide-react"
-import { useRouter, usePathname } from "next/navigation"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Globe, ChevronDown } from "lucide-react";
 
 const languages = [
-  { code: "tr", name: "Türkçe", flag: "🇹🇷" },
-  { code: "en", name: "English", flag: "🇺🇸" },
-]
+  { code: "tr", name: "Türkçe", flag: "🇹🇷", dir: "ltr" },
+  { code: "en", name: "English", flag: "🇺🇸", dir: "ltr" },
+  { code: "ar", name: "العربية", flag: "🇸🇦", dir: "rtl" },
+  { code: "az", name: "Azərbaycanca", flag: "🇦🇿", dir: "ltr" },
+  { code: "et", name: "Eesti", flag: "🇪🇪", dir: "ltr" },
+  { code: "ru", name: "Русский", flag: "🇷🇺", dir: "ltr" },
+];
 
 export function LanguageSelector() {
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0])
-  const router = useRouter()
-  const pathname = usePathname()
+  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language")
+    const savedLang = localStorage.getItem("language");
     if (savedLang) {
-      const lang = languages.find((l) => l.code === savedLang)
-      if (lang) setSelectedLanguage(lang)
+      const lang = languages.find((l) => l.code === savedLang);
+      if (lang) setSelectedLanguage(lang);
     }
-  }, [])
+  }, []);
 
   const handleLanguageChange = (language: (typeof languages)[0]) => {
-    setSelectedLanguage(language)
-    localStorage.setItem("language", language.code)
+    setSelectedLanguage(language);
+    localStorage.setItem("language", language.code);
 
-    // Trigger a custom event to notify other components
-    window.dispatchEvent(new CustomEvent("languageChange", { detail: language.code }))
+    window.dispatchEvent(
+      new CustomEvent("languageChange", { detail: language.code }),
+    );
 
-    // Set document language
-    document.documentElement.lang = language.code
-    document.documentElement.dir = "ltr" // Both Turkish and English are LTR
-  }
+    document.documentElement.lang = language.code;
+    document.documentElement.dir = language.dir;
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="flex items-center space-x-2"
+        >
           <Globe className="h-4 w-4" />
           <span className="hidden sm:inline">
             {selectedLanguage.flag} {selectedLanguage.name}
@@ -61,5 +71,5 @@ export function LanguageSelector() {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
