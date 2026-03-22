@@ -1,13 +1,30 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Globe, Users, Calendar, FileText, BarChart3, Shield, Clock, CheckCircle, ArrowRight } from "lucide-react"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { getTranslation, type Language } from "@/lib/translations"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Globe,
+  Users,
+  Calendar,
+  FileText,
+  BarChart3,
+  Shield,
+  Clock,
+  CheckCircle,
+  ArrowRight,
+} from "lucide-react";
+import Image from "next/image";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { getTranslation, type Language } from "@/lib/translations";
 import {
   Star,
   ArrowLeft,
@@ -17,22 +34,29 @@ import {
   Award,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
+} from "lucide-react";
 
 export default function HomePage() {
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
 
     const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
+      setCurrentLang(event.detail as Language);
+    };
 
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -54,7 +78,10 @@ export default function HomePage() {
                 {getTranslation(currentLang, "hero.subtitle")}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
+                >
                   {getTranslation(currentLang, "hero.startFreeTrial")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -62,9 +89,11 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-100 to-indigo-200 rounded-2xl p-8 shadow-2xl">
-                <img
+                <Image
                   src="/visa-crm-dashboard.png"
                   alt="VisaFlow CRM Dashboard"
+                  width={800}
+                  height={500}
                   className="w-full h-auto rounded-lg shadow-lg"
                 />
               </div>
@@ -120,7 +149,10 @@ export default function HomePage() {
               </div>
               <div className="text-3xl font-bold text-gray-900 mb-2">1M+</div>
               <div className="text-gray-600">
-                {getTranslation(currentLang, "testimonials.processedApplications")}
+                {getTranslation(
+                  currentLang,
+                  "testimonials.processedApplications",
+                )}
               </div>
             </div>
 
@@ -154,25 +186,40 @@ export default function HomePage() {
               <CardHeader>
                 <Users className="h-12 w-12 text-blue-600 mb-4" />
                 <CardTitle>
-                  {getTranslation(currentLang, "mainFeatures.items.customerManagement.title")}
+                  {getTranslation(
+                    currentLang,
+                    "mainFeatures.items.customerManagement.title",
+                  )}
                 </CardTitle>
                 <CardDescription>
-                  {getTranslation(currentLang, "mainFeatures.items.customerManagement.desc1")}
+                  {getTranslation(
+                    currentLang,
+                    "mainFeatures.items.customerManagement.desc1",
+                  )}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.customerManagement.desc2")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.customerManagement.desc2",
+                    )}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.customerManagement.desc3")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.customerManagement.desc3",
+                    )}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.customerManagement.desc4")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.customerManagement.desc4",
+                    )}
                   </li>
                 </ul>
               </CardContent>
@@ -182,25 +229,40 @@ export default function HomePage() {
               <CardHeader>
                 <FileText className="h-12 w-12 text-blue-600 mb-4" />
                 <CardTitle>
-                  {getTranslation(currentLang, "mainFeatures.items.applicationTracking.title")}
+                  {getTranslation(
+                    currentLang,
+                    "mainFeatures.items.applicationTracking.title",
+                  )}
                 </CardTitle>
                 <CardDescription>
-                  {getTranslation(currentLang, "mainFeatures.items.applicationTracking.desc1")}
+                  {getTranslation(
+                    currentLang,
+                    "mainFeatures.items.applicationTracking.desc1",
+                  )}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.applicationTracking.desc2")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.applicationTracking.desc2",
+                    )}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.applicationTracking.desc3")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.applicationTracking.desc3",
+                    )}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.applicationTracking.desc4")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.applicationTracking.desc4",
+                    )}
                   </li>
                 </ul>
               </CardContent>
@@ -210,25 +272,40 @@ export default function HomePage() {
               <CardHeader>
                 <Calendar className="h-12 w-12 text-blue-600 mb-4" />
                 <CardTitle>
-                  {getTranslation(currentLang, "mainFeatures.items.reservationSystem.title")}
+                  {getTranslation(
+                    currentLang,
+                    "mainFeatures.items.reservationSystem.title",
+                  )}
                 </CardTitle>
                 <CardDescription>
-                  {getTranslation(currentLang, "mainFeatures.items.reservationSystem.desc1")}
+                  {getTranslation(
+                    currentLang,
+                    "mainFeatures.items.reservationSystem.desc1",
+                  )}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.reservationSystem.desc2")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.reservationSystem.desc2",
+                    )}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.reservationSystem.desc3")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.reservationSystem.desc3",
+                    )}
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    {getTranslation(currentLang, "mainFeatures.items.reservationSystem.desc4")}
+                    {getTranslation(
+                      currentLang,
+                      "mainFeatures.items.reservationSystem.desc4",
+                    )}
                   </li>
                 </ul>
               </CardContent>
@@ -256,9 +333,24 @@ export default function HomePage() {
                 {getTranslation(currentLang, "detailedFeatures.feature1.desc")}
               </p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>{getTranslation(currentLang, "detailedFeatures.feature1.list1")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature1.list2")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature1.list3")}</li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature1.list1",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature1.list2",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature1.list3",
+                  )}
+                </li>
               </ul>
             </Card>
 
@@ -271,9 +363,24 @@ export default function HomePage() {
                 {getTranslation(currentLang, "detailedFeatures.feature2.desc")}
               </p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>{getTranslation(currentLang, "detailedFeatures.feature2.list1")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature2.list2")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature2.list3")}</li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature2.list1",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature2.list2",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature2.list3",
+                  )}
+                </li>
               </ul>
             </Card>
 
@@ -286,9 +393,24 @@ export default function HomePage() {
                 {getTranslation(currentLang, "detailedFeatures.feature3.desc")}
               </p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>{getTranslation(currentLang, "detailedFeatures.feature3.list1")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature3.list2")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature3.list3")}</li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature3.list1",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature3.list2",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature3.list3",
+                  )}
+                </li>
               </ul>
             </Card>
 
@@ -301,9 +423,24 @@ export default function HomePage() {
                 {getTranslation(currentLang, "detailedFeatures.feature4.desc")}
               </p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>{getTranslation(currentLang, "detailedFeatures.feature4.list1")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature4.list2")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature4.list3")}</li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature4.list1",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature4.list2",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature4.list3",
+                  )}
+                </li>
               </ul>
             </Card>
 
@@ -316,9 +453,24 @@ export default function HomePage() {
                 {getTranslation(currentLang, "detailedFeatures.feature5.desc")}
               </p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>{getTranslation(currentLang, "detailedFeatures.feature5.list1")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature5.list2")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature5.list3")}</li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature5.list1",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature5.list2",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature5.list3",
+                  )}
+                </li>
               </ul>
             </Card>
 
@@ -331,9 +483,24 @@ export default function HomePage() {
                 {getTranslation(currentLang, "detailedFeatures.feature6.desc")}
               </p>
               <ul className="text-sm text-gray-500 space-y-1">
-                <li>{getTranslation(currentLang, "detailedFeatures.feature6.list1")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature6.list2")}</li>
-                <li>{getTranslation(currentLang, "detailedFeatures.feature6.list3")}</li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature6.list1",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature6.list2",
+                  )}
+                </li>
+                <li>
+                  {getTranslation(
+                    currentLang,
+                    "detailedFeatures.feature6.list3",
+                  )}
+                </li>
               </ul>
             </Card>
           </div>
@@ -342,5 +509,5 @@ export default function HomePage() {
 
       <Footer />
     </div>
-  )
+  );
 }

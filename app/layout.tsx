@@ -57,6 +57,15 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://visaflow.tr",
+    languages: {
+      tr: "https://visaflow.tr",
+      en: "https://visaflow.tr",
+      ar: "https://visaflow.tr",
+      az: "https://visaflow.tr",
+      et: "https://visaflow.tr",
+      ru: "https://visaflow.tr",
+      "x-default": "https://visaflow.tr",
+    },
   },
 };
 

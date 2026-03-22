@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/language-selector";
 import { Globe, Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getTranslation, type Language } from "@/lib/translations";
@@ -61,13 +62,14 @@ export function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-gray-900">
-              <img
-                src="/visaflow-logo.png"
-                alt="VisaFlow Logo"
-                className="h-10 w-auto"
-              />
-            </span>
+            <Image
+              src="/visaflow-logo.png"
+              alt="VisaFlow Logo"
+              width={160}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

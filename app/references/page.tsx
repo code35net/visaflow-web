@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { getTranslation, type Language } from "@/lib/translations"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useState, useEffect } from "react";
+import { getTranslation, type Language } from "@/lib/translations";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   Globe,
   Star,
@@ -16,57 +16,67 @@ import {
   Award,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
-import Link from "next/link"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 
 export default function TestimonialsPage() {
-  const [currentLang, setCurrentLang] = useState<Language>("tr")
-  const [currentLogoIndex, setCurrentLogoIndex] = useState(0)
-  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0)
+  const [currentLang, setCurrentLang] = useState<Language>("tr");
+  const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("language") as Language
-    if (savedLang) setCurrentLang(savedLang)
+    const savedLang = localStorage.getItem("language") as Language;
+    if (savedLang) setCurrentLang(savedLang);
 
     const handleLanguageChange = (event: CustomEvent) => {
-      setCurrentLang(event.detail as Language)
-    }
+      setCurrentLang(event.detail as Language);
+    };
 
-    window.addEventListener("languageChange", handleLanguageChange as EventListener)
-    return () => window.removeEventListener("languageChange", handleLanguageChange as EventListener)
-  }, [])
+    window.addEventListener(
+      "languageChange",
+      handleLanguageChange as EventListener,
+    );
+    return () =>
+      window.removeEventListener(
+        "languageChange",
+        handleLanguageChange as EventListener,
+      );
+  }, []);
 
   // Customer logos data
   const customerLogos = [
-    { name: "Red And More", logo: "/references/redandmore.jpg?height=80&width=200&text=Global+Visa" },
-    { name: "Esmirna Visa", logo: "/references/esmirna.png?height=80&width=200&text=EuroTravel" },
-    { name: "Adventura Turizm", logo: "/references/adventura.png?height=80&width=200&text=Visa+Express" },
-    { name: "EDubai", logo: "/references/edubai.png?height=80&width=200&text=International" },
-    { name: "Ez Visas", logo: "/references/ezvisas.webp?height=80&width=200&text=TravelWise" },
-    { name: "Prism Visa", logo: "/references/prismvisa.png?height=80&width=200&text=Visa+Solutions" },
-    { name: "VisaHQ", logo: "/references/visahq.png?height=80&width=200&text=WorldBridge" },
-    { name: "Vizamaz", logo: "/references/vizamaz.png?height=80&width=200&text=Premier+Visa" },
-    { name: "Experience Qatar", logo: "/references/experience_qa.webp?height=80&width=200&text=Global+Gateway" },
-    { name: "Viisa Ekspert", logo: "/references/viisaekspert.svg?height=80&width=200&text=Visa+Masters" },
-    { name: "Gala Travel", logo: "/references/galatravel.png?height=80&width=200&text=Travel+Connect" },
-    { name: "Al Arab", logo: "/references/alarab.png?height=80&width=200&text=Visa+Pro" },
-  ]
+    { name: "Red And More", logo: "/references/redandmore.jpg" },
+    { name: "Esmirna Visa", logo: "/references/esmirna.png" },
+    { name: "Adventura Turizm", logo: "/references/adventura.png" },
+    { name: "EDubai", logo: "/references/edubai.png" },
+    { name: "Ez Visas", logo: "/references/ezvisas.webp" },
+    { name: "Prism Visa", logo: "/references/prismvisa.png" },
+    { name: "VisaHQ", logo: "/references/visahq.png" },
+    { name: "Vizamaz", logo: "/references/vizamaz.png" },
+    { name: "Experience Qatar", logo: "/references/experience_qa.webp" },
+    { name: "Viisa Ekspert", logo: "/references/viisaekspert.svg" },
+    { name: "Gala Travel", logo: "/references/galatravel.png" },
+    { name: "Al Arab", logo: "/references/alarab.png" },
+  ];
 
   // Auto-rotate logos
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentLogoIndex((prev) => (prev + 1) % Math.ceil(customerLogos.length / 6))
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [customerLogos.length])
+      setCurrentLogoIndex(
+        (prev) => (prev + 1) % Math.ceil(customerLogos.length / 6),
+      );
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [customerLogos.length]);
 
   const getVisibleLogos = () => {
-    const logosPerSlide = 6
-    const start = currentLogoIndex * logosPerSlide
-    return customerLogos.slice(start, start + logosPerSlide)
-  }
+    const logosPerSlide = 6;
+    const start = currentLogoIndex * logosPerSlide;
+    return customerLogos.slice(start, start + logosPerSlide);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -85,13 +95,19 @@ export default function TestimonialsPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <Badge className="bg-green-100 text-green-800 hover:bg-green-100 text-lg px-4 py-2">
-                ⭐ 4.9/5 {getTranslation(currentLang, "testimonials.averageRating")}
+                ⭐ 4.9/5{" "}
+                {getTranslation(currentLang, "testimonials.averageRating")}
               </Badge>
               <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100 text-lg px-4 py-2">
-                🏢 150+ {getTranslation(currentLang, "testimonials.activeVisaOffices")}
+                🏢 150+{" "}
+                {getTranslation(currentLang, "testimonials.activeVisaOffices")}
               </Badge>
               <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-100 text-lg px-4 py-2">
-                📈 98% {getTranslation(currentLang, "testimonials.customerSatisfaction")}
+                📈 98%{" "}
+                {getTranslation(
+                  currentLang,
+                  "testimonials.customerSatisfaction",
+                )}
               </Badge>
             </div>
           </div>
@@ -103,10 +119,16 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              {getTranslation(currentLang, "testimonials.trustedByLeadingCompanies")}
+              {getTranslation(
+                currentLang,
+                "testimonials.trustedByLeadingCompanies",
+              )}
             </h2>
             <p className="text-gray-600">
-              {getTranslation(currentLang, "testimonials.joinSuccessfulBusinesses")}
+              {getTranslation(
+                currentLang,
+                "testimonials.joinSuccessfulBusinesses",
+              )}
             </p>
           </div>
 
@@ -118,9 +140,11 @@ export default function TestimonialsPage() {
                     key={`${currentLogoIndex}-${index}`}
                     className="flex items-center justify-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    <img
+                    <Image
                       src={customer.logo || "/placeholder.svg"}
                       alt={customer.name}
+                      width={200}
+                      height={80}
                       className="max-h-12 w-auto opacity-60 hover:opacity-100 transition-opacity"
                     />
                   </div>
@@ -130,15 +154,17 @@ export default function TestimonialsPage() {
 
             {/* Carousel indicators */}
             <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: Math.ceil(customerLogos.length / 6) }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentLogoIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentLogoIndex ? "bg-blue-600" : "bg-gray-300"
-                  }`}
-                />
-              ))}
+              {Array.from({ length: Math.ceil(customerLogos.length / 6) }).map(
+                (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentLogoIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentLogoIndex ? "bg-blue-600" : "bg-gray-300"
+                    }`}
+                  />
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -163,11 +189,19 @@ export default function TestimonialsPage() {
                   <TrendingUp className="h-8 w-8 text-green-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  {getTranslation(currentLang, "testimonials.productivityIncrease")}
+                  {getTranslation(
+                    currentLang,
+                    "testimonials.productivityIncrease",
+                  )}
                 </h3>
-                <div className="text-3xl font-bold text-green-600 mb-2">+65%</div>
+                <div className="text-3xl font-bold text-green-600 mb-2">
+                  +65%
+                </div>
                 <p className="text-gray-600 text-sm">
-                  {getTranslation(currentLang, "testimonials.averageProductivityIncrease")}
+                  {getTranslation(
+                    currentLang,
+                    "testimonials.averageProductivityIncrease",
+                  )}
                 </p>
               </div>
             </Card>
@@ -178,11 +212,19 @@ export default function TestimonialsPage() {
                   <Users className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
-                  {getTranslation(currentLang, "testimonials.customerSatisfaction")}
+                  {getTranslation(
+                    currentLang,
+                    "testimonials.customerSatisfaction",
+                  )}
                 </h3>
-                <div className="text-3xl font-bold text-blue-600 mb-2">+40%</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">
+                  +40%
+                </div>
                 <p className="text-gray-600 text-sm">
-                  {getTranslation(currentLang, "testimonials.higherCustomerSatisfaction")}
+                  {getTranslation(
+                    currentLang,
+                    "testimonials.higherCustomerSatisfaction",
+                  )}
                 </p>
               </div>
             </Card>
@@ -195,9 +237,14 @@ export default function TestimonialsPage() {
                 <h3 className="text-xl font-semibold mb-2">
                   {getTranslation(currentLang, "testimonials.errorReduction")}
                 </h3>
-                <div className="text-3xl font-bold text-purple-600 mb-2">-80%</div>
+                <div className="text-3xl font-bold text-purple-600 mb-2">
+                  -80%
+                </div>
                 <p className="text-gray-600 text-sm">
-                  {getTranslation(currentLang, "testimonials.fewerProcessingErrors")}
+                  {getTranslation(
+                    currentLang,
+                    "testimonials.fewerProcessingErrors",
+                  )}
                 </p>
               </div>
             </Card>
@@ -210,18 +257,28 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {getTranslation(currentLang, "testimonials.joinSuccessfulBusinesses")}
+              {getTranslation(
+                currentLang,
+                "testimonials.joinSuccessfulBusinesses",
+              )}
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              {getTranslation(currentLang, "testimonials.startYourSuccessStory")}
+              {getTranslation(
+                currentLang,
+                "testimonials.startYourSuccessStory",
+              )}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
+              >
                 {getTranslation(currentLang, "hero.startFreeTrial")}
               </Button>
             </div>
             <p className="text-sm text-gray-500 mt-4">
-              {getTranslation(currentLang, "common.noCreditCard")} • {getTranslation(currentLang, "common.cancelAnytime")} •{" "}
+              {getTranslation(currentLang, "common.noCreditCard")} •{" "}
+              {getTranslation(currentLang, "common.cancelAnytime")} •{" "}
               {getTranslation(currentLang, "common.support24_7")}
             </p>
           </div>
@@ -231,5 +288,5 @@ export default function TestimonialsPage() {
       {/* Footer */}
       <Footer />
     </div>
-  )
+  );
 }
